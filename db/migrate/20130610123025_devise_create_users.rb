@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       t.string :authentication_token
 
-      t.integer :type, :default => 0
+      t.integer :user_type, :default => 0
       t.string :firstname, :default => ""
       t.string :lastname, :default => ""
 
