@@ -1,0 +1,8 @@
+== Application Wash Depot ==
+
+Currently there are 3 types of users:
+1) user (type = 0)
+2) manager (type = 1)
+3) admin (type = 2)
+
+Default user type is user.
