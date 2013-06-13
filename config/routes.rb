@@ -4,6 +4,8 @@ WashDepot::Application.routes.draw do
       post 'sessions' => 'sessions#create', :as => 'login'
       delete 'sessions' => 'sessions#destroy', :as => 'logout'
     end
+
+    resources :requests, only: [:index]
   end
 
   # The priority is based upon order of creation:

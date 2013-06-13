@@ -1,8 +1,19 @@
 == Application Wash Depot ==
 
 Currently there are 3 types of users:
-1) user (type = 0)
-2) manager (type = 1)
-3) admin (type = 2)
+	user (type = 0)
+	manager (type = 1)
+	admin (type = 2)
 
-Default user type is user.
+Level of Importnace:
+	0 = Low
+	1 = Normal
+	2 = Urgent
+
+Last Reviewed:
+	"" = not yet reviewed.
+
+Completed:
+	0 = Pending
+
+

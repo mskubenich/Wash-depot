@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  importance: 1
+  creation_date: 2013-06-13 14:17:34
+  description: MyText
+  last_reviewed: 2013-06-13 14:17:34
+  completed: 1
+
+two:
+  importance: 1
+  creation_date: 2013-06-13 14:17:34
+  description: MyText
+  last_reviewed: 2013-06-13 14:17:34
+  completed: 1
