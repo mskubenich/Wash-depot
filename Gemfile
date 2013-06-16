@@ -8,6 +8,10 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'devise'
 
+# Gem rabl with oj JSON parser
+gem 'rabl'
+gem 'oj'
+
 # For heroku
 gem "pg"
 

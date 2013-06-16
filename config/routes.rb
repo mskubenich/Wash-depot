@@ -5,7 +5,7 @@ WashDepot::Application.routes.draw do
       delete 'sessions' => 'sessions#destroy', :as => 'logout'
     end
 
-    resources :requests, only: [:index]
+    resources :requests, only: [:index, :show]
   end
 
   # The priority is based upon order of creation:

@@ -6,6 +6,13 @@ class Api::RequestsController < ApplicationController
 	 # if current_user.type != 0
 	  	@requests = Request.all
 	 # end
-	  respond_with @requests
+	 respond_to do |format|
+	 	format.json {render :json => @requests.to_json }
+	 end
+	   
+	end
+
+	def show
+		@request = Request.find(params[:id])
 	end
 end
