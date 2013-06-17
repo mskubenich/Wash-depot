@@ -19,5 +19,5 @@ node :last_review do |request|
 end
 
 glue :location do 
-	attributes :name
+	attributes :name => :location_name
 end
