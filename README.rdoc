@@ -16,4 +16,43 @@ Last Reviewed:
 Completed:
 	0 = Pending
 
+== Request & Responses ==
 
+User sign in:
+ Type: POST
+ http://wash-depot.herokuapp.com/api/users/sign_in
+
+ request: "{\"user\":{\"email\":\"john.carney@washdepot.com\",\"password\":\"123456789\"}}
+
+ success: {"success":true,"info":"Logged in","data":{"auth_token":"MhNypzbto5xsiqBYV1v2","email":"suser@washdepot.com"}}
+ error: {"success":false,"info":"Login Failed","data":{}}
+
+
+User sign out:
+  Type: DELETE 
+  http://wash-depot.herokuapp.com/api/sessions/\?auth_token\=MhNypzbto5xsiqBYV1v2
+
+  {"success":true,"info":"Logged out","data":{}}
+  {"success":false,"info":"Login Failed","data":{}} 
+
+All requests:
+	(only for authinticate user)
+	 TYPE: GET
+	 http://wash-depot.herokuapp.com/api/requests
+
+	 [
+    {
+        "date": "2004-03-07T13:17:10Z",
+        "description": "Conveyor chain is starting to break",
+        "priority": 2,
+        "pictures": [
+            "#1",
+            "#2",
+            "#3"
+        ],
+        "last_review": "",
+        "problem_area": "Conveyor Chain",
+        "current_status": "Queued",
+        "name": "Location 001"
+    }, ... ]
+    {"success":false,"info":"Login Failed","data":{}}
