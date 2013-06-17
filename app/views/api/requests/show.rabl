@@ -21,3 +21,7 @@ end
 glue :location do 
 	attributes :name => :location_name
 end
+
+node :identifier do |request|
+	request.id.to_s
+end
