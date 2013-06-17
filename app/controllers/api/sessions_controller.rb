@@ -37,14 +37,11 @@ class Api::SessionsController < Devise::SessionsController
   protected
   
   def ensure_params_exist
-    return unless params[:user][:email].blank? || params[:user][:password].blank?
-    render :json=>{:success=>false, :message=>"missing user_login parameter"}, :status=>422
+    return unless params[:user].blank? || params[:user][:email].blank? || params[:user][:password].blank?
+    invalid_login_attempt
   end
 
   def invalid_login_attempt
-    render :status => 401,
-           :json => { :success => false,
-                      :info => "Login Failed",
-                      :data => {} }
+    render 'api/errors/require_auth'
   end
 end
