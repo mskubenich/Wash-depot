@@ -1,5 +1,9 @@
 object @request
-attributes :creation_date => :date, :description => :description, :importance => :priority
+attributes :description => :description, :importance => :priority
+
+node :creation_date do |request|
+	request.creation_date.to_time.to_i.to_s
+end
 
 glue :problem_area do 
 	attributes :name => :problem_area
