@@ -5,7 +5,8 @@ WashDepot::Application.routes.draw do
       delete 'sessions' => 'sessions#destroy', :as => 'logout'
     end
 
-    resources :requests, only: [:index, :show]
+    resources :users , only: :index
+    resources :requests, only: [:index, :show, :create, :update]
   end
 
   # The priority is based upon order of creation:
@@ -57,7 +58,7 @@ WashDepot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'api/sessions#create'
 
   # See how all your routes lay out with "rake routes"
 

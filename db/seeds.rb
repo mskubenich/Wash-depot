@@ -12,18 +12,14 @@ puts "Users creation"
 
 User.delete_all
 
-User.create(id: 1, :firstname => "John", :lastname => "Carney", :email => "john.carney@washdepot.com", :password => "123456789", 
-			:password_confirmation => "123456789")
-User.create(id: 2, :firstname => "Scott", :lastname => "Yorn", :email => "scott.yorn@washdepot.com", :password => "123456789", 
-			:password_confirmation => "123456789")
-User.create(id: 3, :firstname => "Lee", :lastname => "Leyva", :email => "lee.leyva@washdepot.com", :password => "123456789", 
-			:password_confirmation => "123456789")
+User.create(id: 1, :firstname => "John", :lastname => "Carney", :email => "regular@g.com", :password => "123456", 
+			:password_confirmation => "123456")
 
-User.create(id: 4, :firstname => "manager", :lastname => "manager", :email => "manager@washdepot.com", 
-			:password => "manager1", :password_confirmation => "manager1", :user_type => 1)
+User.create(id: 2, :firstname => "manager", :lastname => "manager", :email => "manager@g.com", 
+			:password => "123456", :password_confirmation => "123456", :user_type => 1)
 
-User.create(id: 5, :firstname => "admin", :lastname => "admin", :email => "admin@washdepot.com", 
-			:password => "admin123", :password_confirmation => "admin123", :user_type => 2)
+User.create(id: 3, :firstname => "admin", :lastname => "admin", :email => "admin@g.com", 
+			:password => "123456", :password_confirmation => "123456", :user_type => 2)
 
 
 puts "Statuses creation"
