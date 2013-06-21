@@ -18,7 +18,11 @@ class Api::SessionsController < Devise::SessionsController
       sign_in("user", resource)
       render :json => {:success=>true, 
                       :info => "Logged in", 
-                      :data => {:auth_token=>resource.authentication_token,  :email => resource.email }
+                      :data => {
+                                :auth_token=>resource.authentication_token,  
+                                :email => resource.email, 
+                                :user_type => resource.user_type.to_s 
+                              }
                     }
       return
     end
