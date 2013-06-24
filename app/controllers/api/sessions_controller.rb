@@ -46,6 +46,6 @@ class Api::SessionsController < Devise::SessionsController
   end
 
   def invalid_login_attempt
-    render 'api/errors/require_auth'
+    render 'api/errors/require_auth', :status => 401
   end
 end

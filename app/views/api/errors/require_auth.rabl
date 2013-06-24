@@ -1,3 +1,5 @@
+object false
+
 node do
 	{
 		:success => false,
