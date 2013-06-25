@@ -6,7 +6,7 @@ WashDepot::Application.routes.draw do
     end
 
     resources :users , only: :index
-    resources :requests, only: [:index, :show, :create, :update]
+    resources :requests
   end
 
   # The priority is based upon order of creation:

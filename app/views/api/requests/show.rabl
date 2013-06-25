@@ -19,7 +19,11 @@ node do
 end
 
 node :last_review do |request|
-	request.last_reviewed.to_s
+	if request.last_reviewed
+		request.last_reviewed.to_time.to_i.to_s
+	else
+		""
+	end
 end
 
 glue :location do 
@@ -28,4 +32,8 @@ end
 
 node :identifier do |request|
 	request.id.to_s
+end
+
+node :completed do |request|
+	request.completed.to_s
 end
