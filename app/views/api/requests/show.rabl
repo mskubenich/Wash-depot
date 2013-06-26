@@ -1,5 +1,7 @@
 object @request
-attributes :description => :description, :importance => :priority
+
+attributes :completed, :description
+attributes :importance => :priority
 
 node :creation_date do |request|
 	request.creation_date.to_time.to_i.to_s
@@ -32,8 +34,4 @@ end
 
 node :identifier do |request|
 	request.id.to_s
-end
-
-node :completed do |request|
-	request.completed.to_s
 end

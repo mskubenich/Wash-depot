@@ -26,6 +26,9 @@ puts "Statuses creation"
 
 Status.delete_all
 Status.create(id: 1, name: "Queued")
+Status.create(id: 2, name: "Parts Ordered")
+Status.create(id: 3, name: "Scheduled")
+Status.create(id: 4, name: "Under Review")
 
 puts "Problem Areas creation"
 
