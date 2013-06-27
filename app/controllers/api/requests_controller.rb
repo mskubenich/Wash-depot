@@ -57,7 +57,7 @@ class Api::RequestsController < ApplicationController
 		end
 
 		unless params["last_review"].blank?
-			last_review = params["last_review"]
+			last_review = params["last_review"].to_s
 			@params_options[:last_reviewed] = DateTime.strptime(last_review,'%s') 
 		end
 	end
