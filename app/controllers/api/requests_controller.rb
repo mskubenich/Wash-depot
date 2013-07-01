@@ -16,13 +16,21 @@ class Api::RequestsController < ApplicationController
 
 	def create
     user = User.where(:authentication_token => params[:auth_token]).first
-    images = params[:request][:images]
-    params[:request].delete(:images)
-		@request = user.requests.build params[:request]
-		respond_to do |format|
+    request_json = {creation_date: params[:creation_date], description: params[:description], importance: params[:importance],
+                    last_reviewed: params[:last_reviewed], problem_area_id: params[:problem_area_id], status_id: params[:status_id]}
+		@request = user.requests.build request_json
+	  respond_to do |format|
 			if @request.save
-        images.each do |image|
-          picture = decode_base64file image[:body], image[:content_type], image[:file_name]
+        if params[:image1]
+          picture = decode_base64file params[:image1], 'image/png', 'image1.png'
+          Picture.create picture: picture, request_id: @request.id
+        end
+        if params[:image2]
+          picture = decode_base64file params[:image2], 'image/png', 'image1.png'
+          Picture.create picture: picture, request_id: @request.id
+        end
+        if params[:image2]
+          picture = decode_base64file params[:image3], 'image/png', 'image1.png'
           Picture.create picture: picture, request_id: @request.id
         end
 				format.json {}
