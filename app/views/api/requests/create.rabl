@@ -1,23 +1,22 @@
 object @request
 
-attributes :completed, :description
+attributes :id, :completed, :description
 attributes :importance => :priority
 
 node :creation_date do |request|
 	request.creation_date.to_time.to_i.to_s
 end
 
-glue :problem_area do
-	attributes :name => :problem_area
+node :problem_area do |request|
+   request.problem_area.name
 end
 
-glue :status do
-	attributes :name => :current_status
+node :status do |request|
+	request.status.name
 end
 
-#temp Pictures #
-node do
-	{:pictures => ["#1","#2","#3"]}
+child :pictures do
+	attribute :id
 end
 
 node :last_review do |request|
@@ -28,10 +27,6 @@ node :last_review do |request|
 	end
 end
 
-glue :location do
-	attributes :name => :location_name
-end
-
-node :identifier do |request|
-	request.id.to_s
+node :location do |request|
+	request.location.name if request.location
 end

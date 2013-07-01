@@ -5,13 +5,25 @@ class Api::RequestsController < ApplicationController
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update, :delete]
 	before_filter :retrieve_params, :only => [:update, :create]
-	before_filter :get_request, :only => [:show, :update, :destroy]
+	before_filter :get_request, :only => [:update, :destroy]
 
 	def index
 		@requests = Request.all
 	end
 
 	def show
+    @ar = ['1', '454']
+    respond_to do |format|
+      if params[:request_id]
+        @request = Request.find params[:request_id]
+        @request.class_eval do
+          attr_accessor :body, :original_filename
+        end
+        format.json{}
+      else
+        format.json {render :json => 'request id needed'}
+      end
+    end
 	end
 
 	def create

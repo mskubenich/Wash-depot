@@ -9,6 +9,7 @@ class Request < ActiveRecord::Base
   belongs_to :location
 
   def as_json(options={})
+
   	{:date => creation_date,
   	 :requested_by => "#{self.user.firstname} #{self.user.lastname}",
   	 :problem_area => self.problem_area.name,
