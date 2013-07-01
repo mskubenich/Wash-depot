@@ -10,9 +10,8 @@ development:
   database: wash_depot_development
   pool: 5
   username: root
-  password:
-  timeout: 5000
-  host: localhost
+  password: remeta
+  host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,20 +21,18 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: wash_depot_test
+  database: wash_depot_development
   pool: 5
   username: root
-  password:
-  timeout: 5000
-  host: localhost
+  password: remeta
+  host: 127.0.0.1
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: wash_depot_production
+  database: wash_depot_development
   pool: 5
   username: root
-  password:
-  timeout: 5000
-  host: localhost
+  password: remeta
+  host: 127.0.0.1

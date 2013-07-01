@@ -15,6 +15,8 @@ gem 'oj'
 # For heroku
 gem "pg"
 
+gem 'paperclip'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'

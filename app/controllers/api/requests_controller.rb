@@ -15,10 +15,16 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def create
-		@request = Request.new @params_options
-
+    user = User.where(:authentication_token => params[:auth_token]).first
+    images = params[:request][:images]
+    params[:request].delete(:images)
+		@request = user.requests.build params[:request]
 		respond_to do |format|
 			if @request.save
+        images.each do |image|
+          picture = decode_base64file image[:body], image[:content_type], image[:file_name]
+          Picture.create picture: picture, request_id: @request.id
+        end
 				format.json {}
 			else
 				format.json {render :json => @request.errors.to_json }
@@ -45,6 +51,7 @@ class Api::RequestsController < ApplicationController
 	end
 
 	private
+
 	def only_admin_manager
 		render "api/errors/permission_denied" if current_api_user.user_type == 0
 	end
@@ -106,5 +113,16 @@ class Api::RequestsController < ApplicationController
 
 	def get_request
 		@request = Request.find params[:id]
-	end
+  end
+
+  def decode_base64file(encoded_file, content_type, file_name)
+    decoded_data = Base64.decode64(encoded_file)
+    data = StringIO.new(decoded_data)
+    data.class_eval do
+      attr_accessor :content_type, :original_filename
+    end
+    data.content_type = content_type
+    data.original_filename = File.basename(file_name)
+    data
+  end
 end
