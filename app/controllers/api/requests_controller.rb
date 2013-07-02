@@ -3,16 +3,18 @@ class Api::RequestsController < ApplicationController
 	respond_to :json
 
 	before_filter :only_admin_manager, :only => :index
-	before_filter :only_admin, :only => [:update, :delete]
+	before_filter :only_admin, :only => [:update]
 	before_filter :retrieve_params, :only => [:update, :create]
-	before_filter :get_request, :only => [:update, :destroy]
+	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
 
 	def index
-		@requests = Request.all
+    respond_to do |format|
+      @requests = Request.all
+      format.json{}
+    end
 	end
 
 	def show
-    @ar = ['1', '454']
     respond_to do |format|
       if params[:request_id]
         @request = Request.find params[:request_id]
@@ -28,8 +30,8 @@ class Api::RequestsController < ApplicationController
 
 	def create
     user = User.where(:authentication_token => params[:auth_token]).first
-    request_json = {creation_date: params[:creation_date], description: params[:description], importance: params[:importance],
-                    last_reviewed: params[:last_reviewed], problem_area_id: params[:problem_area_id], status_id: params[:status_id]}
+    request_json = {creation_date: @params_options[:creation_date], description: @params_options[:description], importance: @params_options[:importance],
+                    last_reviewed: @params_options[:last_reviewed], problem_area_id: @params_options[:problem_area_id], status_id: @params_options[:status_id]}
 		@request = user.requests.build request_json
 	  respond_to do |format|
 			if @request.save
@@ -55,7 +57,7 @@ class Api::RequestsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @request.update_attributes(@params_options)
-				format.json { render :nothing => true }
+				format.json {}
 			else
 				format.json {render :json => @request.errors.to_json }
 			end
@@ -64,11 +66,47 @@ class Api::RequestsController < ApplicationController
 
 	def destroy
 		respond_to do |format|
-			if @request.destroy
-				format.json { render :nothing => true }
-			end
+      if @request && @request.destroy
+        format.json { render :json => {success: true, message: 'successfully deleted request'} }
+      else
+        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
+      end
 		end
-	end
+  end
+
+  def add_picture_to_request
+    respond_to do |format|
+      if @request
+        if params[:image1]
+          picture = decode_base64file params[:image1], 'image/png', 'image.png'
+          Picture.create picture: picture, request_id: @request.id
+        end
+        if params[:image2]
+          picture = decode_base64file params[:image2], 'image/png', 'image.png'
+          Picture.create picture: picture, request_id: @request.id
+        end
+        if params[:image2]
+          picture = decode_base64file params[:image3], 'image/png', 'image.png'
+          Picture.create picture: picture, request_id: @request.id
+        end
+        format.json {}
+      else
+        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
+      end
+    end
+  end
+
+  def remove_picture
+    picture = Picture.find_by_id params[:picture_id]
+    respond_to do |format|
+      if picture
+        picture.destroy
+        format.json { render :json => {success: true, message: 'successfully removed image'} }
+      else
+        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
+      end
+    end
+  end
 
 	private
 
@@ -132,7 +170,7 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def get_request
-		@request = Request.find params[:id]
+		@request = Request.find_by_id params[:request_id]
   end
 
   def decode_base64file(encoded_file, content_type, file_name)

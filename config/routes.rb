@@ -9,8 +9,13 @@ WashDepot::Application.routes.draw do
 
     resources :users , only: :index
 
+    post 'get_requests_list', to: 'requests#index'
     post 'create_request', to: 'requests#create'
     post 'get_request', to: 'requests#show'
+    post 'update_request', to: 'requests#update'
+    delete 'remove_request', to: 'requests#destroy'
+    post 'add_picture_to_request', to: 'requests#add_picture_to_request'
+    delete 'remove_picture', to: 'requests#remove_picture'
   end
 
   # The priority is based upon order of creation:

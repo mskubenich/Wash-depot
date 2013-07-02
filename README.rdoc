@@ -66,3 +66,62 @@ upload request:(method POST request JSON)
     JbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8Q
     czKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA
     6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/requests?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response
+
+    {"request":{"id":106,"completed":null,"description":"Con","priority":2,"creation_date":"2004","problem_area":null,"status":null,"last_review":"","location":null
+    ,"pictures":[{"picture":{"id":91}}]}}
+
+get request:(method POST request JSON)
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"100\"}" http://localhost:3000/api/get_request?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response:
+
+    {"request":{"id":100,"completed":null,"description":"Con","priority":2,"creation_date":"1078665430","problem_area":"Conveyor Chain","status":"Queued","last_revi
+    ew":"","location":null,"pictures":[{"picture":{"id":81,"body":"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0\nd2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAA
+    AAKFJREFUeNrs2MENgCAMBdDW\nuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e\n1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXq\nMYdbUnAcO
+    5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8q\ngAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\n"}}]}}
+
+get requests:(method POST, request JSON)
+
+    curl -X POST -d "" http://localhost:3000/api/get_requests_list?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response:
+
+    [{"request":{"id":25,"description":"Conveyor chain is starting to break","creation_date":"2004-03-07T13:17:10Z","completed":null,"last_reviewed":null,"user_id":
+    3,"status_id":1,"problem_area_id":1,"location_id":null}},{"request":{"id":26,"description":"Conveyor chain is starting to break","creation_date":"2004-03-07T13:
+    17:10Z","completed":null,"last_reviewed":null,"user_id":3,"status_id":1,"problem_area_id":1,"location_id":null}}]
+
+update request:(method POST, request JSON)
+
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"105\", \"creation_date\":\"2004-03-07T13:17:10Z\",\"description\": \"Con(changed)\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area_id\":\"1\",\"status_id\": \"1\"}" http://localhost:3000/api/update_request?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response:
+
+    {"request":{"id":105,"completed":null,"description":"Con(changed)","priority":2,"creation_date":"2004","problem_area":null,"status":null,"last_review":"","locat
+    ion":null,"pictures":[{"picture":{"id":86}}]}}
+
+remove request:(method DELETE, request JSON)
+
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"request_id\":\"93\"}" http://localhost:3000/api/remov
+    e_request?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response:
+
+    {"success":true,"message":"successfully deleted request"}
+
+add picture to request:(method POST, request JSON)
+
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"93\", \"image1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/add_picture_to_request?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response:
+
+    {"request":{"id":90,"pictures":[{"picture":{"id":71}},{"picture":{"id":87}},{"picture":{"id":88}}]}}
+
+remove picture:(method DELETE, request JSON)
+
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"picture_id\":\"90\"}" http://localhost:3000/api/remove_picture?auth_token=Tx9EbsW6wyimRSRHSgQd
+
+response:
+
+    {"success":true,"message":"successfully removed image"}
