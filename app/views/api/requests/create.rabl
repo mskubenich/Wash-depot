@@ -1,10 +1,17 @@
 object @request
 
-attributes :id, :completed, :description
-attributes :importance => :priority
+attributes :id, :completed
+
+node :priority do |request|
+	request.importance
+end
 
 node :creation_date do |request|
 	request.creation_date.to_time.to_i.to_s
+end
+
+node :desc do |request|
+	request.description
 end
 
 node :problem_area do |request|

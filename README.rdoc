@@ -61,8 +61,8 @@ All requests:
 = Requests API
 upload request:(method POST request JSON)
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"creation_date\":
-    \"2004-03-07T13:17:10Z\",\"description\": \"Con\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area_id\":
-    \"1\",\"status_id\": \"1\", \"image1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSB
+    \"2004-03-07T13:17:10Z\",\"location\":\"sfdf\", \"desc\": \"Con\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area\":
+    \"Conveyor Chain\",\"current_status\": \"blablabla\", \"image1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSB
     JbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8Q
     czKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA
     6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/requests?auth_token=Tx9EbsW6wyimRSRHSgQd
@@ -94,7 +94,7 @@ response:
 
 update request:(method POST, request JSON)
 
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"105\", \"creation_date\":\"2004-03-07T13:17:10Z\",\"description\": \"Con(changed)\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area_id\":\"1\",\"status_id\": \"1\"}" http://localhost:3000/api/update_request?auth_token=Tx9EbsW6wyimRSRHSgQd
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"105\",\"location\":\"sfdf\", \"creation_date\":\"2004-03-07T13:17:10Z\",\"description\": \"Con(changed)\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area\":\"dfdf\",\"curent_status\": \"dgfd\"}" http://localhost:3000/api/update_request?auth_token=Tx9EbsW6wyimRSRHSgQd
 
 response:
 

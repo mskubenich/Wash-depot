@@ -30,9 +30,7 @@ class Api::RequestsController < ApplicationController
 
 	def create
     user = User.where(:authentication_token => params[:auth_token]).first
-    request_json = {creation_date: @params_options[:creation_date], description: @params_options[:description], importance: @params_options[:importance],
-                    last_reviewed: @params_options[:last_reviewed], problem_area_id: @params_options[:problem_area_id], status_id: @params_options[:status_id]}
-		@request = user.requests.build request_json
+		@request = user.requests.build @params_options
 	  respond_to do |format|
 			if @request.save
         if params[:image1]
@@ -133,8 +131,8 @@ class Api::RequestsController < ApplicationController
 			@params_options[:completed] = params["completed"]
 		end
 
-		unless params["last_review"].blank?
-			last_review = params["last_review"].to_s
+		unless params["last_reviewed"].blank?
+			last_review = params["last_reviewed"].to_s
 			@params_options[:last_reviewed] = DateTime.strptime(last_review,'%s') 
 		end
 
@@ -151,8 +149,8 @@ class Api::RequestsController < ApplicationController
 			@params_options['requested_by'] = Location.where(:name => params['location']).first.id
 		end
 		
-		unless params['description'].blank?
-			@params_options[:description] = params['description']
+		unless params['desc'].blank?
+			@params_options[:description] = params['desc']
 		end
 
 		unless params['importance'].blank?
