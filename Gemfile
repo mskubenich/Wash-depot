@@ -12,10 +12,8 @@ gem 'devise'
 gem 'rabl'
 gem 'oj'
 
-# For heroku
-gem "pg"
-
 gem 'paperclip'
+gem 'haml-rails'
 
 group :test, :development do
   gem 'rspec-rails'
