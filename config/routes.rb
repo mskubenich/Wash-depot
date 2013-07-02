@@ -1,14 +1,14 @@
 WashDepot::Application.routes.draw do
   get "pages/index"
 
-  namespace :api do
-    devise_for :users do
+  devise_for :users do
+    namespace :api do
       post 'sessions' => 'sessions#create', :as => 'login'
       delete 'sessions' => 'sessions#destroy', :as => 'logout'
     end
-
+  end
+  namespace :api do
     resources :users , only: :index
-
     post 'get_requests_list', to: 'requests#index'
     post 'create_request', to: 'requests#create'
     post 'get_request', to: 'requests#show'
