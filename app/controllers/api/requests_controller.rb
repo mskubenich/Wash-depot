@@ -1,5 +1,5 @@
 class Api::RequestsController < ApplicationController
-	
+
 	respond_to :json
 
 	before_filter :only_admin_manager, :only => :index
