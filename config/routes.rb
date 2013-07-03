@@ -7,6 +7,7 @@ WashDepot::Application.routes.draw do
       delete 'sessions' => 'sessions#destroy', :as => 'logout'
     end
   end
+
   namespace :api do
     resources :users , only: :index
     post 'get_requests_list', to: 'requests#index'
@@ -17,6 +18,12 @@ WashDepot::Application.routes.draw do
     post 'add_picture_to_request', to: 'requests#add_picture_to_request'
     delete 'remove_picture', to: 'requests#remove_picture'
   end
+
+  resources :locations, only: :index
+  resources :problem_areas, only: :index
+  resources :statuses, only: :index
+  resources :requests
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

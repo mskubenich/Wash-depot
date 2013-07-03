@@ -1,0 +1,15 @@
+%h2
+  .row-fluid
+    Locations:
+%table.table.table-striped
+  %tr
+    %th
+      Id
+    %th
+      Name
+  - @locations.each do |location|
+    %tr
+      %td
+        = location.id
+      %td
+        = location.name

@@ -1,0 +1,23 @@
+%h2
+  .row-fluid
+    Users:
+%table.table.table-striped
+  %tr
+    %th
+      Email
+    %th
+      First Name
+    %th
+      Last Name
+    %th
+      Registered at
+  - @users.each do |user|
+    %tr
+      %td
+        = user.email
+      %td
+        = user.firstname
+      %td
+        = user.lastname
+      %td
+        = user.created_at
