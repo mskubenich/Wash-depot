@@ -6,7 +6,7 @@ class Api::JsonFailure < Devise::FailureApp
 	    if request_format == '*/*'
 	      # it is n the best way, but ...
 	      # render habl view
-	      render 'app/views/api/errors/require_auth', :status => 401
+        render json: {success: false, info: 'Login Failed', data: {}, status: 401}
 	    else
 	      super
 	    end

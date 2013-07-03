@@ -13,3 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jqgrid
+
+jQuery.browser={};(function(){jQuery.browser.msie=false;
+    jQuery.browser.version=0;if(navigator.userAgent.match(/MSIE ([0-9]+)\./)){
+        jQuery.browser.msie=true;jQuery.browser.version=RegExp.$1;}})();
+
+var jqgrid = jQuery("#invoices_list").jqGrid("navGrid", "#invoices_pager", {"search":true,"refresh":false});
+jqgrid.jqGrid('navButtonAdd',"#pager",{caption:"NewButton"});
+

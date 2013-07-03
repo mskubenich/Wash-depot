@@ -1,6 +1,10 @@
-collection @requests
+collection @requests , :object_root => false
 
 attributes :id, :creation_date, :completed, :last_reviewed
+
+node :priority do |request|
+	request.importance
+end
 
 node :desc do |request|
 	request.description

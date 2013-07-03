@@ -1,4 +1,4 @@
-object @request
+object @request => nil
 
 attributes :id, :completed
 

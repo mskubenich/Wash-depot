@@ -1,15 +1,6 @@
-%h2
-  .row-fluid
-    Requests:
-%table.table.table-striped
-  %tr
-    %th
-      Id
-    %th
-      Description
-  - @requests.each do |status|
-    %tr
-      %td
-        = status.id
-      %td
-        = status.description
+.row-fluid
+  .span12
+    %table#invoices_list
+    #invoices_pager
+
+= raw(invoices_jqgrid)

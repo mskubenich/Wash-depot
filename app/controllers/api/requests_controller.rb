@@ -109,11 +109,11 @@ class Api::RequestsController < ApplicationController
 	private
 
 	def only_admin_manager
-		render "api/errors/permission_denied" if current_api_user.user_type == 0
+		render "api/errors/permission_denied" if current_user.user_type == 0
 	end
 
 	def only_admin
-		render "api/errors/permission_denied" if current_api_user.user_type != 2
+		render "api/errors/permission_denied" if current_user.user_type != 2
 	end
 
 	def retrieve_params
@@ -140,8 +140,8 @@ class Api::RequestsController < ApplicationController
 			@params_options[:creation_date] = DateTime.strptime(params['creation_date'].to_s,'%s')
 		end
 
-		unless params['location'].blank?
-			@params_options[:location_id] = Location.where(:name => params['location']).first.id
+		unless params['location_name'].blank?
+			@params_options[:location_id] = Location.where(:name => params['location_name']).first.id
 		end
 
 		# &&&
