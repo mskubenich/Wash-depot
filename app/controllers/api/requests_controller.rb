@@ -35,15 +35,18 @@ class Api::RequestsController < ApplicationController
 			if @request.save
         if params[:image1]
           picture = decode_base64file params[:image1], 'image/png', 'image1.png'
-          Picture.create picture: picture, request_id: @request.id
+          @request.picture1 = Picture.create picture: picture
+          @request.save
         end
         if params[:image2]
           picture = decode_base64file params[:image2], 'image/png', 'image1.png'
-          Picture.create picture: picture, request_id: @request.id
+          @request.picture2 = Picture.create picture: picture
+          @request.save
         end
-        if params[:image2]
-          picture = decode_base64file params[:image3], 'image/png', 'image1.png'
-          Picture.create picture: picture, request_id: @request.id
+        if params[:image3]
+          picture = decode_base64file params[:image2], 'image/png', 'image1.png'
+          @request.picture3 = Picture.create picture: picture
+          @request.save
         end
 				format.json {}
 			else
@@ -153,8 +156,8 @@ class Api::RequestsController < ApplicationController
 			@params_options[:description] = params['desc']
 		end
 
-		unless params['importance'].blank?
-			@params_options[:importance] = params['importance']
+		unless params['priority'].blank?
+			@params_options[:importance] = params['priority']
 		end
 
 		unless params['problem_area'].blank?

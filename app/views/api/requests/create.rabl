@@ -6,6 +6,18 @@ node :priority do |request|
 	request.importance
 end
 
+node :picture1_id do |request|
+	request.picture1.id if request.picture1
+end
+
+node :picture2_id do |request|
+	request.picture2.id if request.picture2
+end
+
+node :picture3_id do |request|
+	request.picture3.id if request.picture3
+end
+
 node :creation_date do |request|
 	request.creation_date.to_time.to_i.to_s
 end
@@ -20,10 +32,6 @@ end
 
 node :status do |request|
 	request.status.name if request.status
-end
-
-child :pictures do
-	attribute :id
 end
 
 node :last_review do |request|

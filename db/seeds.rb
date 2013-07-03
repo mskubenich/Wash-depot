@@ -75,7 +75,3 @@ Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem
 			   description: "Water leak in electrical room", importance: 2, status_id: 1, completed: 0, location_id: 3) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 2, problem_area_id: 3, 
 			   description: "Mitter curtain is squeaking", importance: 1, status_id: 1, completed: 0, location_id: 3) #pictures !!!
-
-Request.all.each do |request|
-	request.pictures << [Picture.create, Picture.create, Picture.create]
-end

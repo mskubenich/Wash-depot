@@ -19,6 +19,18 @@ node :status do |request|
 	request.status.name
 end
 
+node :picture1 do |request|
+    Base64.encode64(File.binread(request.picture1.picture.path)) if request.picture1
+end
+
+node :picture2 do |request|
+    Base64.encode64(File.binread(request.picture2.picture.path)) if request.picture2
+end
+
+node :picture3 do |request|
+    Base64.encode64(File.binread(request.picture3.picture.path)) if request.picture3
+end
+
 child :pictures do
     node :id do |img|
        img.id

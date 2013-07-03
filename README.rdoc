@@ -20,12 +20,14 @@ Completed:
 
 User sign in:
  Type: POST
- http://wash-depot.herokuapp.com/api/users/sign_in
 
- request: "{\"user\":{\"email\":\"john.carney@washdepot.com\",\"password\":\"123456789\"}}
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"user\":{\"email\":\"admin@g.com\",\"password\":\"123456\"}}"
+    http://localhost:3000/api/sessions
 
- success: {"success":true,"info":"Logged in","data":{"auth_token":"MhNypzbto5xsiqBYV1v2","email":"suser@washdepot.com"}}
- error: {"success":false,"info":"Login Failed","data":{}}
+response:
+
+    success: {"success":true,"info":"Logged in","data":{"auth_token":"MhNypzbto5xsiqBYV1v2","email":"suser@washdepot.com"}}
+    error: {"success":false,"info":"Login Failed","data":{}}
 
 
 User sign out:
@@ -33,46 +35,22 @@ User sign out:
   http://wash-depot.herokuapp.com/api/sessions/\?auth_token\=MhNypzbto5xsiqBYV1v2
 
   {"success":true,"info":"Logged out","data":{}}
-  {"success":false,"info":"Login Failed","data":{}} 
-
-All requests:
-	(only for authinticate user)
-	 TYPE: GET
-	 http://wash-depot.herokuapp.com/api/requests
-
-	 [
-    {
-        "date": "2004-03-07T13:17:10Z",
-        "description": "Conveyor chain is starting to break",
-        "priority": 2,
-        "pictures": [
-            "#1",
-            "#2",
-            "#3"
-        ],
-        "last_review": "",
-        "problem_area": "Conveyor Chain",
-        "current_status": "Queued",
-        "name": "Location 001"
-    }, ... ]
-    {"success":false,"info":"Login Failed","data":{}}
+  {"success":false,"info":"Login Failed","data":{}}
 
 
 = Requests API
 upload request:(method POST request JSON)
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"creation_date\":
-    \"2004-03-07T13:17:10Z\",\"location\":\"sfdf\", \"desc\": \"Con\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area\":
-    \"Conveyor Chain\",\"current_status\": \"blablabla\", \"image1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSB
-    JbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8Q
-    czKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA
-    6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/requests?auth_token=Tx9EbsW6wyimRSRHSgQd
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"location_name\":\"Location 001\",\"creation_date\":\"20
+    04-03-07T13:17:10Z\",\"desc\": \"Con\",\"priority\": \"2\",\"last_reviewed\": \"56\",\"problem_area\":\"Conveyor Chain\",\"current_status\": \"Queued\", \"image
+    1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz
+    4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA6cwowAL
+    UVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/create_request?auth_token=R99sXqx6m1PedsCkwwag
 
-response
+response:
+    {"id":53,"completed":null,"priority":2,"picture1_id":21,"picture2_id":null,"picture3_id":null,"creation_date":"2004","desc":"Con","problem_area":"Conveyor Chain
+    ","status":"Queued","last_review":"56","location":"Location 001"}
 
-    {"request":{"id":106,"completed":null,"description":"Con","priority":2,"creation_date":"2004","problem_area":null,"status":null,"last_review":"","location":null
-    ,"pictures":[{"picture":{"id":91}}]}}
-
-get request:(method POST request JSON)
+(outdated)get request:(method POST request JSON)
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"100\"}" http://localhost:3000/api/get_request?auth_token=Tx9EbsW6wyimRSRHSgQd
 
 response:
@@ -84,15 +62,16 @@ response:
 
 get requests:(method POST, request JSON)
 
-    curl -X POST -d "" http://localhost:3000/api/get_requests_list?auth_token=Tx9EbsW6wyimRSRHSgQd
+    curl -X POST -d "" http://localhost:3000/api/get_requests_list?auth_token=R99sXqx6m1PedsCkwwag
 
 response:
 
-    [{"request":{"id":25,"description":"Conveyor chain is starting to break","creation_date":"2004-03-07T13:17:10Z","completed":null,"last_reviewed":null,"user_id":
-    3,"status_id":1,"problem_area_id":1,"location_id":null}},{"request":{"id":26,"description":"Conveyor chain is starting to break","creation_date":"2004-03-07T13:
-    17:10Z","completed":null,"last_reviewed":null,"user_id":3,"status_id":1,"problem_area_id":1,"location_id":null}}]
+    [{{"id":53,"creation_date":"1970-01-01T00:33:24Z","completed":null,"last_reviewed":"1970-01-01T00:00:56Z","priority":2,"desc":"Con","status":"Queued","pro
+    blem_area":"Conveyor Chain","location":"Location 001","picture1":"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0\nd2FyZQBBZG9iZSBJbWFnZVJlYWR5ccll
+    PAAAAKFJREFUeNrs2MENgCAMBdDW\nuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e\n1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXq\nMYdbUn
+    AcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8q\ngAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\n","picture2":null,"picture3_id":null}]
 
-update request:(method POST, request JSON)
+(outdated)update request:(method POST, request JSON)
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"105\",\"location\":\"sfdf\", \"creation_date\":\"2004-03-07T13:17:10Z\",\"description\": \"Con(changed)\",\"importance\": \"2\",\"last_reviewed\": \"\",\"problem_area\":\"dfdf\",\"curent_status\": \"dgfd\"}" http://localhost:3000/api/update_request?auth_token=Tx9EbsW6wyimRSRHSgQd
 
@@ -101,7 +80,7 @@ response:
     {"request":{"id":105,"completed":null,"description":"Con(changed)","priority":2,"creation_date":"2004","problem_area":null,"status":null,"last_review":"","locat
     ion":null,"pictures":[{"picture":{"id":86}}]}}
 
-remove request:(method DELETE, request JSON)
+(outdated)remove request:(method DELETE, request JSON)
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"request_id\":\"93\"}" http://localhost:3000/api/remov
     e_request?auth_token=Tx9EbsW6wyimRSRHSgQd
@@ -110,7 +89,7 @@ response:
 
     {"success":true,"message":"successfully deleted request"}
 
-add picture to request:(method POST, request JSON)
+(outdated)add picture to request:(method POST, request JSON)
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"93\", \"image1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/add_picture_to_request?auth_token=Tx9EbsW6wyimRSRHSgQd
 
@@ -118,7 +97,7 @@ response:
 
     {"request":{"id":90,"pictures":[{"picture":{"id":71}},{"picture":{"id":87}},{"picture":{"id":88}}]}}
 
-remove picture:(method DELETE, request JSON)
+(outdated)remove picture:(method DELETE, request JSON)
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"picture_id\":\"90\"}" http://localhost:3000/api/remove_picture?auth_token=Tx9EbsW6wyimRSRHSgQd
 

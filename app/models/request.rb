@@ -1,8 +1,11 @@
 class Request < ActiveRecord::Base
   attr_accessible :completed, :creation_date, :description, :importance, :last_reviewed,
-  				  :user_id, :status_id, :location_id, :problem_area_id
+  				  :user_id, :status_id, :location_id, :problem_area_id,
+            :picture1, :picture2, :picture3
 
-  has_many :pictures
+  belongs_to :picture1, foreign_key: :picture1_id, class_name: 'Picture'
+  belongs_to :picture2, foreign_key: :picture2_id, class_name: 'Picture'
+  belongs_to :picture3, foreign_key: :picture3_id, class_name: 'Picture'
   belongs_to :user
   belongs_to :status
   belongs_to :problem_area

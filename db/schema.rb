@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701110414) do
+ActiveRecord::Schema.define(:version => 20130703144958) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20130701110414) do
   end
 
   create_table "pictures", :force => true do |t|
-    t.integer  "request_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "picture_file_name"
@@ -47,6 +46,9 @@ ActiveRecord::Schema.define(:version => 20130701110414) do
     t.integer  "status_id"
     t.integer  "problem_area_id"
     t.integer  "location_id"
+    t.integer  "picture1_id"
+    t.integer  "picture2_id"
+    t.integer  "picture3_id"
   end
 
   create_table "statuses", :force => true do |t|
