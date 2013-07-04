@@ -1,0 +1,57 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Request:
+    .text-right.span4
+      = link_to 'Edit', edit_request_path(@request), class: 'btn btn-primary'
+      = link_to 'Back', requests_path, class: 'btn btn-info'
+      = link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+
+%p
+  %b
+    Completed:
+  = @request.completed
+%p
+  %b
+    Creation Date:
+  = @request.creation_date
+%p
+  %b
+    Description:
+  = @request.description
+%p
+  %b
+    Last reviewed:
+  = @request.last_reviewed
+%p
+  %b
+    Importance:
+  = @request.importance
+%p
+  %b
+    User:
+  = @request.user.email if @request.user
+%p
+  %b
+    Status:
+  = @request.status.name if @request.status
+%p
+  %b
+    Location:
+  = @request.location.name if @request.location
+%p
+  %b
+    Problem Area:
+  = @request.problem_area.name if @request.problem_area
+%p
+  %b
+    Picture #1:
+    = image_tag @request.picture1.url if @request.picture1
+%p
+  %b
+    Picture #2:
+    = image_tag @request.picture2.url if @request.picture2
+%p
+  %b
+    Picture #3:
+    = image_tag @request.picture3.url if @request.picture3

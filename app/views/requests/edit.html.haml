@@ -1,0 +1,9 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Edit Request
+    .text-right.span4
+      = link_to 'Back', requests_path, class: 'btn btn-info'
+      = link_to 'Show', request_path(@request), class: 'btn'
+      = link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= render 'form'

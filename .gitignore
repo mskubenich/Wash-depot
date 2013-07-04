@@ -27,5 +27,6 @@ tmp/*
 !*.swf
 coverage/
 public/images/*
+public/pictures/*
 public/assets/*
 #config/*.yml

@@ -3,13 +3,23 @@ class Request < ActiveRecord::Base
   				  :user_id, :status_id, :location_id, :problem_area_id,
             :picture1, :picture2, :picture3
 
-  belongs_to :picture1, foreign_key: :picture1_id, class_name: 'Picture'
-  belongs_to :picture2, foreign_key: :picture2_id, class_name: 'Picture'
-  belongs_to :picture3, foreign_key: :picture3_id, class_name: 'Picture'
   belongs_to :user
   belongs_to :status
   belongs_to :problem_area
   belongs_to :location
+
+  has_attached_file :picture1,
+                    :url  => "/pictures/1/requests/:id/:style/picture1.:extension",
+                    :default_url => "/assets/noavatar.gif",
+                    :path => ":rails_root/public/pictures/1/requests/:id/:style/picture1.:extension"
+  has_attached_file :picture2,
+                    :url  => "/pictures/2/requests/:id/:style/picture1.:extension",
+                    :default_url => "/assets/noavatar.gif",
+                    :path => ":rails_root/public/pictures/2/requests/:id/:style/picture1.:extension"
+  has_attached_file :picture3,
+                    :url  => "/pictures/3/requests/:id/:style/picture1.:extension",
+                    :default_url => "/assets/noavatar.gif",
+                    :path => ":rails_root/public/pictures/3/requests/:id/:style/picture1.:extension"
 
   def as_json(options={})
 

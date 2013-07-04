@@ -1,6 +1,13 @@
 .row-fluid
+  .text-left.span6
+    %h2
+      Requests:
+  .text-right.span6
+    = link_to 'New Request', new_request_path, class: 'btn btn-info'
+%br
+.row-fluid
   .span12
-    %table#invoices_list
-    #invoices_pager
+    %table#requests_list
+    #requests_pager
 
-= raw(invoices_jqgrid)
+= raw(requests_jqgrid)

@@ -1,0 +1,59 @@
+= form_for(@request, class: 'form-horizontal') do |f|
+  .control-group
+    .control-label
+      Completed:
+    .controls
+      = f.number_field :completed, class: 'span6'
+  .control-group
+    .control-label
+      Description:
+    .controls
+      = f.text_area :description, class: 'span6', rows: 4
+  .control-group
+    .control-label
+      Creation Date:
+    .controls
+      = f.datetime_select :creation_date, class: 'span3'
+  .control-group
+    .control-label
+      Last Reviewed:
+    .controls
+      = f.datetime_select :last_reviewed, class: 'span3'
+  .control-group
+    .control-label
+      Importance:
+    .controls
+      = f.number_field :importance, class: 'span6'
+  .control-group
+    .control-label
+      Status:
+    .controls
+      = f.select :status_id, options_for_select(Status.all.collect{ |status| [status.name, status.id] }), class: 'span6'
+  .control-group
+    .control-label
+      Location:
+    .controls
+      = f.select :location_id, options_for_select(Location.all.collect{ |location| [location.name, location.id] }), class: 'span6'
+  .control-group
+    .control-label
+      Problem Area:
+    .controls
+      = f.select :problem_area_id, options_for_select(ProblemArea.all.collect{ |area| [area.name, area.id] }), class: 'span6'
+  .control-group
+    .control-label
+      Picture #1:
+    .controls
+      = f.file_field :picture1, class: 'span6'
+  .control-group
+    .control-label
+      Picture #2:
+    .controls
+      = f.file_field :picture2, class: 'span6'
+  .control-group
+    .control-label
+      Picture #3:
+    .controls
+      = f.file_field :picture3, class: 'span6'
+  .control-group
+    .controls
+      = f.submit class: 'btn btn-info'

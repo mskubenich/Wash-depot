@@ -11,21 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703144958) do
+ActiveRecord::Schema.define(:version => 20130704100020) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "pictures", :force => true do |t|
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
   end
 
   create_table "problem_areas", :force => true do |t|
@@ -40,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20130703144958) do
     t.text     "description"
     t.datetime "last_reviewed"
     t.integer  "completed"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.integer  "user_id"
     t.integer  "status_id"
     t.integer  "problem_area_id"
@@ -49,6 +40,18 @@ ActiveRecord::Schema.define(:version => 20130703144958) do
     t.integer  "picture1_id"
     t.integer  "picture2_id"
     t.integer  "picture3_id"
+    t.string   "picture1_file_name"
+    t.string   "picture1_content_type"
+    t.integer  "picture1_file_size"
+    t.datetime "picture1_updated_at"
+    t.string   "picture2_file_name"
+    t.string   "picture2_content_type"
+    t.integer  "picture2_file_size"
+    t.datetime "picture2_updated_at"
+    t.string   "picture3_file_name"
+    t.string   "picture3_content_type"
+    t.integer  "picture3_file_size"
+    t.datetime "picture3_updated_at"
   end
 
   create_table "statuses", :force => true do |t|
