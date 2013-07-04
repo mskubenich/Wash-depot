@@ -10,6 +10,7 @@ WashDepot::Application.routes.draw do
 
   namespace :api do
     resources :users , only: :index
+
     post 'get_requests_list', to: 'requests#index'
     post 'create_request', to: 'requests#create'
     post 'get_request', to: 'requests#show'
@@ -17,6 +18,11 @@ WashDepot::Application.routes.draw do
     delete 'remove_request', to: 'requests#destroy'
     post 'add_picture_to_request', to: 'requests#add_picture_to_request'
     delete 'remove_picture', to: 'requests#remove_picture'
+
+    get 'get_locations', to: 'lists#get_locations'
+    get 'get_problem_areas', to: 'lists#get_problem_areas'
+    get 'get_statuses', to: 'lists#get_statuses'
+    get 'get_available_importance', to: 'lists#get_available_importance'
   end
 
   resources :locations, only: :index

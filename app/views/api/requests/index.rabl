@@ -1,4 +1,4 @@
-collection @requests , :object_root => false
+collection @requests, :object_root => false
 
 attributes :id, :creation_date, :completed, :last_reviewed
 
@@ -23,13 +23,14 @@ node :location do |request|
 end
 
 node :picture1 do |request|
-    Base64.encode64(File.binread(request.picture1.picture.path)) if request.picture1
+    Base64.encode64(File.binread(request.picture1.path)) if request.picture1 && request.picture1_file_size
 end
 
 node :picture2 do |request|
-    Base64.encode64(File.binread(request.picture2.picture.path)) if request.picture2
+    Base64.encode64(File.binread(request.picture2.path)) if request.picture2  && request.picture1_file_size
 end
 
-node :picture3_id do |request|
-    Base64.encode64(File.binread(request.picture3.picture.path)) if request.picture3
+node :picture3 do |request|
+    Base64.encode64(File.binread(request.picture3.path)) if request.picture3 && request.picture1_file_size
 end
+

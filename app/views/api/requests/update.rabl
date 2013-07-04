@@ -19,10 +19,6 @@ node :status do |request|
 	request.status.name if request.status
 end
 
-child :pictures do
-	attribute :id
-end
-
 node :last_review do |request|
 	if request.last_reviewed
 		request.last_reviewed.to_time.to_i.to_s

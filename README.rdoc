@@ -80,7 +80,7 @@ response:
     {"request":{"id":105,"completed":null,"description":"Con(changed)","priority":2,"creation_date":"2004","problem_area":null,"status":null,"last_review":"","locat
     ion":null,"pictures":[{"picture":{"id":86}}]}}
 
-(outdated)remove request:(method DELETE, request JSON)
+remove request:(method DELETE, request JSON)
 
     curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"request_id\":\"93\"}" http://localhost:3000/api/remov
     e_request?auth_token=Tx9EbsW6wyimRSRHSgQd
@@ -89,18 +89,25 @@ response:
 
     {"success":true,"message":"successfully deleted request"}
 
-(outdated)add picture to request:(method POST, request JSON)
 
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"93\", \"image1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/add_picture_to_request?auth_token=Tx9EbsW6wyimRSRHSgQd
+= Lists API
 
-response:
+Locations
+    curl -X GET -d "" http://localhost:3000/api/get_locations?auth_token=R99sXqx6m1PedsCkwwag
+response
+    ["Location 001","Location 002","Location 003","Location 004"]
 
-    {"request":{"id":90,"pictures":[{"picture":{"id":71}},{"picture":{"id":87}},{"picture":{"id":88}}]}}
+Problem Areas
+    curl -X GET -d "" http://localhost:3000/api/get_problem_areas?auth_token=R99sXqx6m1PedsCkwwag
+response
+    ["Conveyor Chain","Electrical Equip Room","Mitter Curtain","Wheel Blasters","Plumbing Water","POS System"]
 
-(outdated)remove picture:(method DELETE, request JSON)
+Statuses
+    curl -X GET -d "" http://localhost:3000/api/get_statuses?auth_token=R99sXqx6m1PedsCkwwag
+response
+    ["Queued","Parts Ordered","Scheduled","Under Review"]
 
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"picture_id\":\"90\"}" http://localhost:3000/api/remove_picture?auth_token=Tx9EbsW6wyimRSRHSgQd
-
-response:
-
-    {"success":true,"message":"successfully removed image"}
+Available importances
+    curl -X GET -d "" http://localhost:3000/api/get_available_importance?auth_token=R99sXqx6m1PedsCkwwag
+response
+    [1,2,3]

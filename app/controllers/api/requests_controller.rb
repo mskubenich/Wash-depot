@@ -33,21 +33,6 @@ class Api::RequestsController < ApplicationController
 		@request = user.requests.build @params_options
 	  respond_to do |format|
 			if @request.save
-        if params[:image1]
-          picture = decode_base64file params[:image1], 'image/png', 'image1.png'
-          @request.picture1 = Picture.create picture: picture
-          @request.save
-        end
-        if params[:image2]
-          picture = decode_base64file params[:image2], 'image/png', 'image1.png'
-          @request.picture2 = Picture.create picture: picture
-          @request.save
-        end
-        if params[:image3]
-          picture = decode_base64file params[:image2], 'image/png', 'image1.png'
-          @request.picture3 = Picture.create picture: picture
-          @request.save
-        end
 				format.json {}
 			else
 				format.json {render :json => @request.errors.to_json }
@@ -79,7 +64,6 @@ class Api::RequestsController < ApplicationController
     respond_to do |format|
       if @request
         if params[:image1]
-          picture = decode_base64file params[:image1], 'image/png', 'image.png'
           Picture.create picture: picture, request_id: @request.id
         end
         if params[:image2]
@@ -164,10 +148,22 @@ class Api::RequestsController < ApplicationController
 			@params_options[:problem_area_id] = ProblemArea.where(:name => params['problem_area']).first.id
 		end
 
-		unless params['identifier'].blank?
-			# Set request id
-			@params_options[:id] = params['identifier']
-		end
+    unless params['identifier'].blank?
+      # Set request id
+      @params_options[:id] = params['identifier']
+    end
+
+    unless params[:image1].blank?
+      @params_options[:picture1] = decode_base64file params[:image1], 'image/png', 'image.png'
+    end
+
+    unless params[:image2].blank?
+      @params_options[:picture2] = decode_base64file params[:image2], 'image/png', 'image.png'
+    end
+
+    unless params[:image3].blank?
+      @params_options[:picture3] = decode_base64file params[:image3], 'image/png', 'image.png'
+    end
 	end
 
 	def get_request
