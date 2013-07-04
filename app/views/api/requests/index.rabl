@@ -23,14 +23,14 @@ node :location do |request|
 end
 
 node :picture1 do |request|
-    Base64.encode64(File.binread(request.picture1.path)) if request.picture1 && request.picture1_file_size
+    Base64.encode64(File.binread(request.picture1.path)) if request.picture1_file_size
 end
 
 node :picture2 do |request|
-    Base64.encode64(File.binread(request.picture2.path)) if request.picture2  && request.picture1_file_size
+    Base64.encode64(File.binread(request.picture2.path)) if request.picture2_file_size
 end
 
 node :picture3 do |request|
-    Base64.encode64(File.binread(request.picture3.path)) if request.picture3 && request.picture1_file_size
+    Base64.encode64(File.binread(request.picture3.path)) if request.picture3_file_size
 end
 

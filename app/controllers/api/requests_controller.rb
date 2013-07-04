@@ -42,11 +42,15 @@ class Api::RequestsController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @request.update_attributes(@params_options)
-				format.json {}
-			else
-				format.json {render :json => @request.errors.to_json }
-			end
+      if @request
+        if @request.update_attributes(@params_options)
+          format.json {}
+        else
+          format.json {render :json => @request.errors.to_json }
+        end
+      else
+        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
+      end
 		end 
 	end
 
