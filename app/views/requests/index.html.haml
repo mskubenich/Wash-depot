@@ -7,7 +7,43 @@
 %br
 .row-fluid
   .span12
-    %table#requests_list
-    #requests_pager
+    = will_paginate @requests
+    %table.table.table-striped
+      %tr
+        %th
+          Completed
+        %th
+          Description
+        %th
+          Importance
+        %th
+          Location
+        %th
+          Problem Area
+        %th
+          Status
+        %th
+          User
+        %th
+      - @requests.each do |request|
+        %tr
+          %td
+            = request.completed
+          %td
+            = request.description
+          %td
+            = request.importance
+          %td
+            = request.location.name if request.location
+          %td
+            = request.problem_area.name if request.problem_area
+          %td
+            = request.status.name if request.status
+          %td
+            = request.user.email if request.user
+          %td{style: 'text-align: right'}
+            = link_to 'Show', request_path(request), class: 'btn'
+            = link_to 'Edit', edit_request_path(request), class: 'btn btn-primary'
+            = link_to 'Destroy', request_path(request), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
-= raw(requests_jqgrid)
+    = will_paginate @requests

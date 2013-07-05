@@ -1,0 +1,29 @@
+= form_for(@user, class: 'form-horizontal') do |f|
+  .control-group
+    .control-label
+      FirstName:
+    .controls
+      = f.text_field :firstname, class: 'span6'
+  .control-group
+    .control-label
+      Last Name:
+    .controls
+      = f.text_field :lastname, class: 'span6', rows: 4
+  .control-group
+    .control-label
+      Email:
+    .controls
+      = f.email_field :email, class: 'span3'
+  .control-group
+    .control-label
+      Password:
+    .controls
+      = f.password_field :password, class: 'span3'
+  .control-group
+    .control-label
+      Password Confirmation:
+    .controls
+      = f.password_field :password_confirmation, class: 'span6'
+  .control-group
+    .controls
+      = f.submit class: 'btn btn-info'

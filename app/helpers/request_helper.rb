@@ -5,11 +5,12 @@ module RequestHelper
 
     grid = [{
               :url => '/requests',
+              :restful => true,
               :datatype => 'json',
               :mtype => 'GET',
               :colNames => ['Id','Description', 'Importance', 'Creation Date', 'Completed', 'User', 'Status', 'Problem Area', 'Location'],
               :colModel  => [
-                { :name => 'id',   :index => 'id',    :width => 30 },
+                { :name => 'rid',   :index => 'rid',    :width => 30, :key => 'rid' },
                 { :name => 'description', :index => 'description',  :width => 100 },
                 { :name => 'importance', :index => 'importance',  :width => 80 },
                 { :name => 'creation_date', :index => 'creation_date',  :width => 130 },
@@ -17,7 +18,7 @@ module RequestHelper
                 { :name => 'user', :index => 'user',  :width => 100 },
                 { :name => 'status', :index => 'status',  :width => 100 },
                 { :name => 'problem_area', :index => 'problem_area',  :width => 100 },
-                { :name => 'location', :index => 'location',  :width => 100 }
+                { name: 'location', :index => 'location',  :width => 100 }
               ],
               :pager => '#requests_pager',
               :rowNum => 10,
@@ -26,13 +27,22 @@ module RequestHelper
               :height => 'auto',
               :width => '100%',
               :ondblClickRow => "function() { click();}".to_json_var,
-              :multiselect => false
+              :multiselect => false,
+              :editurl => 'ClientArray',
+              :sortname => 'rid',
+
             }]
 
     # See http://www.trirand.com/jqgridwiki/doku.php?id=wiki:navigator
     # ('navGrid','#gridpager',{parameters}, prmEdit, prmAdd, prmDel, prmSearch, prmView)
 
-    pager = [:navGrid, "#requests_pager", {:del => true}, {:closeAfterEdit => true, :closeOnEscape => true}, {}, {}, {}, {}]
+    pager = [:navGrid, "#requests_pager", {:del => true, :add => true, :search => false},
+             {:closeAfterEdit => true, :closeOnEscape => true},
+             {},
+             {url: "/requests/{{rid}}", mtype: 'DELETE'},
+             {},
+             {}
+    ]
 
     #pager_button = [:navButtonAdd, "#invoices_pager", {:caption => 'Add', :onClickButton => 'function() {click()}'.to_json_var }]
 

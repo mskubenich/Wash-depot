@@ -15,11 +15,19 @@
 //= require_tree .
 //= require jqgrid
 
-function click(){
-    var myGrid = $("#requests_list");
-    selectedRowId = myGrid.jqGrid ('getGridParam', 'selrow');
-//    cellValue = myGrid.jqGrid ('getCell', 'id', 'columnName');
-    window.location='/requests/'+selectedRowId;
-}
+//function click(){
+//    var myGrid = $("#requests_list");
+//    selectedRowId = myGrid.jqGrid ('getGridParam', 'selrow');
+////    cellValue = myGrid.jqGrid ('getCell', 'id', 'columnName');
+//    window.location='/requests/'+selectedRowId;
+//}
+//
+//var rid = 'dfdfdf';
+//
+//var jqgrid = jQuery("#requests_list").jqGrid("navGrid", "#requests_pager", {"search":true,"refresh":false});
 
-var jqgrid = jQuery("#requests_list").jqGrid("navGrid", "#requests_pager", {"search":true,"refresh":false});
+//
+//%table#requests_list
+//#requests_pager
+//
+//    = raw(requests_jqgrid)

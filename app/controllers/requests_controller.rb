@@ -1,23 +1,23 @@
 class RequestsController < ApplicationController
   def index
 
-    @columns = ['id', 'description', 'importance', 'creation_date', 'completed', 'email', 'status_name', 'problem_area_name', 'location_name']
-
+    #@columns = ['id', 'description', 'importance', 'creation_date', 'completed', 'email', 'status_name', 'problem_area_name', 'location_name']
+    params[:rows] = 10
     @requests = Request.paginate(:page => params[:page], :per_page => params[:rows])
-
-    @requests.each do |request|
-      request.class_eval do
-        attr_accessor :status_name, :problem_area_name, :location_name, :email
-      end
-      request.status_name = request.status ? request.status.name : nil
-      request.problem_area_name = request.problem_area ? request.problem_area.name : nil
-      request.location_name = request.location ? request.location.name : nil
-      request.email = request.user ? request.user.email : nil
-    end
-
-    if request.xhr?
-      render :json => json_for_jqgrid(@requests, @columns)
-    end
+    #
+    #@requests.each do |request|
+    #  request.class_eval do
+    #    attr_accessor :status_name, :problem_area_name, :location_name, :email
+    #  end
+    #  request.status_name = request.status ? request.status.name : nil
+    #  request.problem_area_name = request.problem_area ? request.problem_area.name : nil
+    #  request.location_name = request.location ? request.location.name : nil
+    #  request.email = request.user ? request.user.email : nil
+    #end
+    #
+    #if request.xhr?
+    #  render :json => json_for_jqgrid(@requests, @columns)
+    #end
 
   end
 
