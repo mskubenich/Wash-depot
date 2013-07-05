@@ -1,6 +1,9 @@
-%h2
-  .row-fluid
-    Statuses:
+.row-fluid
+  .text-left.span6
+    %h2
+      Statuses:
+  .text-right.span6
+    = link_to 'New status', new_status_path, class: 'btn btn-info'
 %table.table.table-striped
   %tr
     %th

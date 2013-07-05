@@ -1,6 +1,9 @@
-%h2
-  .row-fluid
-    Locations:
+.row-fluid
+  .text-left.span6
+    %h2
+      Locations:
+  .text-right.span6
+    = link_to 'New location', new_location_path, class: 'btn btn-info'
 %table.table.table-striped
   %tr
     %th
