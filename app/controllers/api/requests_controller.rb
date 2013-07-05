@@ -115,7 +115,8 @@ class Api::RequestsController < ApplicationController
 
 		unless params["current_status"].blank?
 			current_status_name = params["current_status"]
-			@params_options[:status_id] = Status.where(:name => current_status_name).first.id
+      status = Status.where(:name => current_status_name).first
+			@params_options[:status_id] = status.id if status
 		end
 
 		unless params["completed"].blank?
@@ -124,15 +125,18 @@ class Api::RequestsController < ApplicationController
 
 		unless params["last_reviewed"].blank?
 			last_review = params["last_reviewed"].to_s
-			@params_options[:last_reviewed] = DateTime.strptime(last_review,'%s') 
+      format = "%Y-%m-%dT%H:%M:%SZ"
+			@params_options[:last_reviewed] = DateTime.strptime(last_review, format)
 		end
 
-		unless params['creation_date'].blank? 
-			@params_options[:creation_date] = DateTime.strptime(params['creation_date'].to_s,'%s')
+		unless params['creation_date'].blank?
+      format = "%Y-%m-%dT%H:%M:%SZ"
+			@params_options[:creation_date] = DateTime.strptime(params['creation_date'].to_s, format)
 		end
 
 		unless params['location_name'].blank?
-			@params_options[:location_id] = Location.where(:name => params['location_name']).first.id
+      location = Location.where(:name => params['location_name']).first
+			@params_options[:location_id] = location.id if location
 		end
 
 		# &&&
@@ -149,7 +153,8 @@ class Api::RequestsController < ApplicationController
     end
 
 		unless params['problem_area'].blank?
-			@params_options[:problem_area_id] = ProblemArea.where(:name => params['problem_area']).first.id
+      problem_area = ProblemArea.where(:name => params['problem_area']).first
+			@params_options[:problem_area_id] = problem_area.id if problem_area
 		end
 
     unless params['identifier'].blank?

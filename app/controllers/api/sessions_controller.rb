@@ -30,7 +30,6 @@ class Api::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    puts '+++++++++++++++++++++++++++++++++++++++++++9999999999999'
     #warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#invalid_login_attempt")
     User.where(:authentication_token => params[:auth_token]).first.update_column(:authentication_token, nil)
     render :status => 200,

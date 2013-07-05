@@ -8,11 +8,11 @@
 .row-fluid
   .span12
     = will_paginate @requests
-    %table.table.table-striped
+    %table.table.table-striped{style: 'table-layout: fixed;'}
       %tr
         %th
           Completed
-        %th
+        %th.span2
           Description
         %th
           Importance
@@ -29,7 +29,7 @@
         %tr
           %td
             = request.completed
-          %td
+          %td{style: 'width: 150px; overflow: hidden'}
             = request.description
           %td
             = request.importance
