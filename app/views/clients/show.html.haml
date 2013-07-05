@@ -1,0 +1,18 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      User:
+      = @client.firstname
+      = @client.lastname
+    .text-right.span4
+      = link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary'
+      = link_to 'Back', clients_path, class: 'btn btn-info'
+      = link_to 'Destroy', client_path(@client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+%p
+  %b
+    Email:
+  = @client.email
+%p
+  %b
+    Created At:
+  = @client.created_at

@@ -1,4 +1,6 @@
-= form_for(@user, class: 'form-horizontal') do |f|
+- url = (@client.id)?client_path(@client):clients_path
+- method = (@client.id)? :put : :post
+= form_for(@client, :url => url, :method => method, class: 'form-horizontal') do |f|
   .control-group
     .control-label
       FirstName:

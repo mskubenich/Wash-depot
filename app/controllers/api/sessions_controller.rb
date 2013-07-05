@@ -3,7 +3,7 @@ class Api::SessionsController < Devise::SessionsController
 
   before_filter :require_no_authentication, :only => [:create]
   skip_before_filter :verify_authenticity_token,
-                       :if => Proc.new { |c| c.request.format == 'application/json' }
+                       :if => Proc.new { |c| c.request.format == 'application/json' } , :except => [:destroy]
 
    before_filter :ensure_params_exist, :only => [:create] 
    
@@ -30,7 +30,8 @@ class Api::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#invalid_login_attempt")
+    puts '+++++++++++++++++++++++++++++++++++++++++++9999999999999'
+    #warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#invalid_login_attempt")
     User.where(:authentication_token => params[:auth_token]).first.update_column(:authentication_token, nil)
     render :status => 200,
            :json => { :success => true,

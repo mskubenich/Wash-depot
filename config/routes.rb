@@ -29,7 +29,7 @@ WashDepot::Application.routes.draw do
   resources :problem_areas, only: :index
   resources :statuses, only: :index
   resources :requests
-  resources :users
+  resources :clients
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,9 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Edit User
+    .text-right.span4
+      = link_to 'Back', clients_path, class: 'btn btn-info'
+      = link_to 'Show', client_path(@client), class: 'btn'
+      = link_to 'Destroy', client_path(@client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= render 'form'
