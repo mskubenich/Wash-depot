@@ -1,0 +1,9 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Problem Area:
+      = @area.name
+    .text-right.span4
+      = link_to 'Edit', edit_problem_area_path(@area), class: 'btn btn-primary'
+      = link_to 'Back', problem_areas_path, class: 'btn btn-info'
+      = link_to 'Destroy', problem_area_path(@area), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

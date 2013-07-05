@@ -1,0 +1,11 @@
+- url = (@area.id)?problem_area_path(@area):problem_areas_path
+- method = (@area.id)? :put : :post
+= form_for(@area, :url => url, :method => method, class: 'form-horizontal') do |f|
+  .control-group
+    .control-label
+      Name:
+    .controls
+      = f.text_field :name, class: 'span6'
+  .control-group
+    .controls
+      = f.submit class: 'btn btn-info'

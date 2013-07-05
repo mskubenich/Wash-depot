@@ -1,15 +1,26 @@
-%h2
-  .row-fluid
-    Problem Areas:
+.row-fluid
+  .text-left.span6
+    %h2
+      Problem Areas:
+  .text-right.span6
+    = link_to 'New Problem Area', new_problem_area_path, class: 'btn btn-info'
+= will_paginate @areas
 %table.table.table-striped
   %tr
     %th
       Id
     %th
       Name
-  - @problem_areas.each do |area|
+    %th
+  - @areas.each do |area|
     %tr
       %td
         = area.id
       %td
         = area.name
+      %td{style: 'text-align: right'}
+        = link_to 'Show', problem_area_path(area), class: 'btn'
+        = link_to 'Edit', edit_problem_area_path(area), class: 'btn btn-primary'
+        = link_to 'Destroy', problem_area_path(area), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= will_paginate @areas
+

@@ -7,7 +7,9 @@ node :desc do |request|
 end
 
 node :user do |request|
-	request.user.email if request.user
+    if request.user
+	    request.user.firstname + ' ' + request.user.lastname
+	end
 end
 
 node :status do |request|
