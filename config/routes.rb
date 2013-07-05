@@ -28,13 +28,10 @@ WashDepot::Application.routes.draw do
   resources :locations, only: :index
   resources :problem_areas
   resources :locations
-<<<<<<< HEAD
   resources :problem_areas, only: :index
   resources :statuses
-=======
   resources :problem_areas
-  resources :statuses, only: :index
->>>>>>> 9777999c9f1c1d5cf1c90fdf7991ec4aaaafad31
+  resources :statuses
   resources :requests
   resources :clients
 
