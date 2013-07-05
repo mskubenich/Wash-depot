@@ -27,7 +27,7 @@ WashDepot::Application.routes.draw do
 
   resources :locations
   resources :problem_areas, only: :index
-  resources :statuses, only: :index
+  resources :statuses
   resources :requests
   resources :users
 

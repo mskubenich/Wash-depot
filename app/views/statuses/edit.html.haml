@@ -1,0 +1,9 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Edit Status
+    .text-right.span4
+      = link_to 'Back', status_path, class: 'btn btn-info'
+      = link_to 'Show', status_path(@status), class: 'btn'
+      = link_to 'Destroy', @status, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= render 'form'

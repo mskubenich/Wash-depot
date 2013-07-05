@@ -13,3 +13,8 @@
         = status.id
       %td
         = status.name
+      %td{style: 'text-align: right'}
+        = link_to 'Show', status_path(status), class: 'btn'
+        = link_to 'Edit', edit_status_path(status), class: 'btn btn-primary'
+        = link_to 'Destroy', status_path(status), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+

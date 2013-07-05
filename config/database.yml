@@ -10,7 +10,7 @@ development:
   database: wash_depot_development
   pool: 5
   username: root
-  password: remeta
+  password: 
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
@@ -24,7 +24,7 @@ test:
   database: wash_depot_development
   pool: 5
   username: root
-  password: remeta
+  password: 
   host: 127.0.0.1
 
 production:
@@ -34,5 +34,5 @@ production:
   database: wash_depot_development
   pool: 5
   username: root
-  password: remeta
+  password: 
   host: 127.0.0.1
