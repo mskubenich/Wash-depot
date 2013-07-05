@@ -48,10 +48,6 @@ Location.create(id: 2, name: "Location 002")
 Location.create(id: 3, name: "Location 003")
 Location.create(id: 4, name: "Location 004")
 
-puts "Pictures creation"
-
-Picture.delete_all
-
 puts "Request creation"
 
 Request.delete_all
