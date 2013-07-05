@@ -26,7 +26,7 @@ WashDepot::Application.routes.draw do
   end
 
   resources :locations, only: :index
-  resources :problem_areas, only: :index
+  resources :problem_areas
   resources :statuses, only: :index
   resources :requests
   resources :clients
