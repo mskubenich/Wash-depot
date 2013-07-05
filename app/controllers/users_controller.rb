@@ -14,9 +14,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    puts '-----------------------------------------test----'
-            puts @user
-    puts '--------------------------------------------ere-'
     respond_to do |format|
       if @user.save
         format.html {

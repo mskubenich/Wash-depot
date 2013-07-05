@@ -1,7 +1,6 @@
 object @request
 
-attributes :id, :completed
-attributes :importance => :priority
+attributes :id, :completed, :importance
 
 node :desc do |request|
 	request.description

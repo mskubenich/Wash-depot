@@ -144,9 +144,9 @@ class Api::RequestsController < ApplicationController
 			@params_options[:description] = params['desc']
 		end
 
-		unless params['priority'].blank?
-			@params_options[:importance] = params['priority']
-		end
+    unless params['importance'].blank?
+      @params_options[:importance] = params['importance']
+    end
 
 		unless params['problem_area'].blank?
 			@params_options[:problem_area_id] = ProblemArea.where(:name => params['problem_area']).first.id

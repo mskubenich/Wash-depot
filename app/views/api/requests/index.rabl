@@ -1,13 +1,13 @@
 collection @requests, :object_root => false
 
-attributes :id, :creation_date, :completed, :last_reviewed
-
-node :priority do |request|
-	request.importance
-end
+attributes :id, :creation_date, :completed, :last_reviewed, :importance
 
 node :desc do |request|
 	request.description
+end
+
+node :user do |request|
+	request.user.email if request.user
 end
 
 node :status do |request|
