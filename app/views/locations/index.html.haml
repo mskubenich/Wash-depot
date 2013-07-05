@@ -7,9 +7,15 @@
       Id
     %th
       Name
+    %th
+
   - @locations.each do |location|
     %tr
       %td
         = location.id
       %td
         = location.name
+      %td{style: 'text-align: right'}
+        = link_to 'Show', location_path(location), class: 'btn'
+        = link_to 'Edit', edit_location_path(location), class: 'btn btn-primary'
+        = link_to 'Destroy', location_path(location), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

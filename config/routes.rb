@@ -25,7 +25,7 @@ WashDepot::Application.routes.draw do
     get 'get_available_importance', to: 'lists#get_available_importance'
   end
 
-  resources :locations, only: :index
+  resources :locations
   resources :problem_areas, only: :index
   resources :statuses, only: :index
   resources :requests

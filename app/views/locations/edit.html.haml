@@ -1,0 +1,9 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Edit Location
+    .text-right.span4
+      = link_to 'Back', location_path, class: 'btn btn-info'
+      = link_to 'Show', location_path(@location), class: 'btn'
+      = link_to 'Destroy', @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= render 'form'
