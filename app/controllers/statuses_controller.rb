@@ -1,9 +1,7 @@
 class StatusesController < ApplicationController
   def index
-    @statuses = Status.all
     @statuses_grid = initialize_grid(Status, per_page: 10)
   end
-
 
   def show
     @status = Status.find params[:id]

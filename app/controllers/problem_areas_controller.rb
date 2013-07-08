@@ -1,7 +1,7 @@
 class ProblemAreasController < ApplicationController
 
   def index
-    @areas = ProblemArea.paginate(:page => params[:page], :per_page => 10)
+    @areas_grid = initialize_grid(Status, per_page: 10)
   end
 
   def show
