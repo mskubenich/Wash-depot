@@ -19,10 +19,7 @@ WashDepot::Application.routes.draw do
     post 'add_picture_to_request', to: 'requests#add_picture_to_request'
     delete 'remove_picture', to: 'requests#remove_picture'
 
-    get 'get_locations', to: 'lists#get_locations'
-    get 'get_problem_areas', to: 'lists#get_problem_areas'
-    get 'get_statuses', to: 'lists#get_statuses'
-    get 'get_available_importance', to: 'lists#get_available_importance'
+    get 'get_lists', to: 'lists#get_lists'
   end
 
   resources :locations, only: :index

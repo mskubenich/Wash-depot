@@ -92,22 +92,13 @@ response:
 
 = Lists API
 
-Locations
-    curl -X GET -d "" http://localhost:3000/api/get_locations?auth_token=R99sXqx6m1PedsCkwwag
-response
-    ["Location 001","Location 002","Location 003","Location 004"]
+request GET:
 
-Problem Areas
-    curl -X GET -d "" http://localhost:3000/api/get_problem_areas?auth_token=R99sXqx6m1PedsCkwwag
-response
-    ["Conveyor Chain","Electrical Equip Room","Mitter Curtain","Wheel Blasters","Plumbing Water","POS System"]
+    curl -X GET -d "" http://localhost:3000/api/get_lists?auth_token=jAdC38p3qhWDDn7eC6FP
 
-Statuses
-    curl -X GET -d "" http://localhost:3000/api/get_statuses?auth_token=R99sXqx6m1PedsCkwwag
-response
-    ["Queued","Parts Ordered","Scheduled","Under Review"]
+response:
 
-Available importances
-    curl -X GET -d "" http://localhost:3000/api/get_available_importance?auth_token=R99sXqx6m1PedsCkwwag
-response
-    [1,2,3]
+    {"locations":["Location 002","test2"],"problem_areas":["Wheel Blasters","Plumbing Water 45","POS System","test","name","test2"],"statuses":["Queuedhvfg","Parts
+    Ordered","Scheduled","Under Review","test","wrg","rtdhsatrs","rgws","thbe","ethsts","tehst"]}
+
+
