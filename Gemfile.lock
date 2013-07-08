@@ -67,12 +67,13 @@ GEM
     hike (1.2.3)
     i18n (0.6.4)
     journey (1.0.4)
-    jqgrid_for_rails (1.0.2)
-      will_paginate
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.8.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -107,11 +108,6 @@ GEM
       activesupport (= 3.2.11)
       bundler (~> 1.0)
       railties (= 3.2.11)
-    rails-asset-jqgrid (0.0.3)
-      jquery-rails
-      rails-asset-jqueryui
-    rails-asset-jqueryui (0.0.3)
-      jquery-rails
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -154,6 +150,8 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    wice_grid (3.2.1)
+      kaminari (>= 0.13.0)
     will_paginate (3.0.4)
 
 PLATFORMS
@@ -165,16 +163,14 @@ DEPENDENCIES
   devise
   factory_girl_rails
   haml-rails
-  jqgrid_for_rails
   jquery-rails (~> 1.0)
   mysql2
   oj
   paperclip
   rabl
   rails (= 3.2.11)
-  rails-asset-jqgrid
-  rails-asset-jqueryui
   rspec-rails
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
+  wice_grid
   will_paginate

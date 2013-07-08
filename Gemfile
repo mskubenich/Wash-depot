@@ -15,10 +15,8 @@ gem 'oj'
 gem 'paperclip'
 gem 'haml-rails'
 gem 'jquery-rails', '~> 1.0'
-gem 'rails-asset-jqueryui'
-gem 'rails-asset-jqgrid'
-gem 'jqgrid_for_rails'
 gem 'will_paginate'
+gem 'wice_grid'
 
 group :test, :development do
   gem 'rspec-rails'

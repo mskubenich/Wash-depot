@@ -4,20 +4,9 @@
       Statuses:
   .text-right.span6
     = link_to 'New status', new_status_path, class: 'btn btn-info'
-%table.table.table-striped
-  %tr
-    %th
-      Id
-    %th
-      Name
-  - @statuses.each do |status|
-    %tr
-      %td
-        = status.id
-      %td
-        = status.name
-      %td{style: 'text-align: right'}
-        = link_to 'Show', status_path(status), class: 'btn'
-        = link_to 'Edit', edit_status_path(status), class: 'btn btn-primary'
-        = link_to 'Destroy', status_path(status), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-
+%span12
+  = grid(@statuses_grid, upper_pagination_panel: true) do |g|
+    - g.column name: 'Name', attribute: 'name'  do |status|
+      - status.name
+    - g.column do |status|
+      - link_to('Show', status_path(status)) + ' ' + link_to('Edit', edit_status_path(status)) + ' ' + link_to('Destroy', status_path(status), method: :delete, data: { confirm: 'Are you sure?' })

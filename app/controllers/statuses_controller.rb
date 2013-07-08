@@ -1,6 +1,7 @@
 class StatusesController < ApplicationController
   def index
     @statuses = Status.all
+    @statuses_grid = initialize_grid(Status, per_page: 10)
   end
 
 
@@ -44,7 +45,9 @@ class StatusesController < ApplicationController
         }
       else
         flash[:error] = 'Failed to update status.'
-        render action: 'edit'
+        format.html{
+          render action: 'edit'
+        }
       end
     end
   end

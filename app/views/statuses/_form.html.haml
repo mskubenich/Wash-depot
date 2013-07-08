@@ -1,9 +1,14 @@
+- if @status.errors.any?
+  - @status.errors.full_messages.each do |msg|
+    .alert.alert-error
+      %button.close{type: :button, 'data-dismiss' => 'alert'}
+      = msg
 = form_for(@status, class: 'form-horizontal') do |f|
   .control-group
     .control-label
       Name:
     .controls
-      = f.text_area :name, class: 'span6', rows: 4
+      = f.text_field :name, class: 'span6', rows: 4
   .control-group
     .controls
       = f.submit class: 'btn btn-info'
