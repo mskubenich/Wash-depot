@@ -14,9 +14,11 @@ gem 'oj'
 
 gem 'paperclip'
 gem 'haml-rails'
-gem 'jquery-rails', '~> 1.0'
+gem 'jquery-rails'
 gem 'will_paginate'
 gem 'wice_grid'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-datetimepicker-rails'
 
 group :test, :development do
   gem 'rspec-rails'

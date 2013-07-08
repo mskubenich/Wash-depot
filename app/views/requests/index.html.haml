@@ -4,46 +4,19 @@
       Requests:
   .text-right.span6
     = link_to 'New Request', new_request_path, class: 'btn btn-info'
-%br
-.row-fluid
-  .span12
-    = will_paginate @requests
-    %table.table.table-striped{style: 'table-layout: fixed;'}
-      %tr
-        %th
-          Completed
-        %th.span2
-          Description
-        %th
-          Importance
-        %th
-          Location
-        %th
-          Problem Area
-        %th
-          Status
-        %th
-          User
-        %th
-      - @requests.each do |request|
-        %tr
-          %td
-            = request.completed
-          %td{style: 'width: 150px; overflow: hidden'}
-            = request.description
-          %td
-            = request.importance
-          %td
-            = request.location.name if request.location
-          %td
-            = request.problem_area.name if request.problem_area
-          %td
-            = request.status.name if request.status
-          %td
-            = request.user.email if request.user
-          %td{style: 'text-align: right'}
-            = link_to 'Show', request_path(request), class: 'btn'
-            = link_to 'Edit', edit_request_path(request), class: 'btn btn-primary'
-            = link_to 'Destroy', request_path(request), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= grid(@requests_grid, upper_pagination_panel: true) do |g|
+  - g.column name: 'Completed', attribute: 'completed' do |request|
+    - request.completed
+  - g.column name: 'Description', attribute: 'description' do |request|
+    - request.description[0..12] if request.description
+  - g.column name: 'Importance', attribute: 'importance' do |request|
+    - request.importance
+  - g.column name: 'Location', attribute: 'name', model: Location do |request|
+    - request.location.name if  request.location
+  - g.column name: 'Problem Area', attribute: 'name', model: ProblemArea do |request|
+    - request.problem_area.name if  request.problem_area
+  - g.column name: 'Status', attribute: 'name', model: Status do |request|
+    - request.status.name if  request.status
+  - g.column do |request|
+    - link_to('Show', request_path(request)) + ' ' + link_to('Edit', edit_request_path(request)) + ' ' + link_to('Destroy', request_path(request), method: :delete, data: { confirm: 'Are you sure?' })
 
-    = will_paginate @requests

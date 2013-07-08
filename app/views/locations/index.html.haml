@@ -4,9 +4,8 @@
       Locations:
   .text-right.span6
     = link_to 'New location', new_location_path, class: 'btn btn-info'
-%span12
-  = grid(@locations_grid, upper_pagination_panel: true) do |g|
-    - g.column name: 'Name', attribute: 'name'  do |location|
-      - location.name
-    - g.column do |location|
-      - link_to('Show', location_path(location)) + ' ' + link_to('Edit', edit_location_path(location)) + ' ' + link_to('Destroy', location_path(location), method: :delete, data: { confirm: 'Are you sure?' })
+= grid(@locations_grid, upper_pagination_panel: true) do |g|
+  - g.column name: 'Name', attribute: 'name'  do |location|
+    - location.name
+  - g.column do |location|
+    - link_to('Show', location_path(location)) + ' ' + link_to('Edit', edit_location_path(location)) + ' ' + link_to('Destroy', location_path(location), method: :delete, data: { confirm: 'Are you sure?' })
