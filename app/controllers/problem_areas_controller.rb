@@ -1,7 +1,7 @@
 class ProblemAreasController < ApplicationController
 
   def index
-    @areas_grid = initialize_grid(Status, per_page: 10)
+    @areas_grid = initialize_grid(ProblemArea, per_page: 10)
   end
 
   def show

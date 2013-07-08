@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   def index
-    @locations = Location.all
+    @locations_grid = initialize_grid(Location, per_page: 10)
   end
   
   def show
