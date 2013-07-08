@@ -123,15 +123,12 @@ class Api::RequestsController < ApplicationController
 			@params_options[:completed] = params["completed"]
 		end
 
-		unless params["last_reviewed"].blank?
-			last_review = params["last_reviewed"].to_s
-      format = "%Y-%m-%dT%H:%M:%SZ"
-			@params_options[:last_reviewed] = DateTime.strptime(last_review, format)
+		unless params['last_reviewed'].blank?
+			@params_options[:last_reviewed] = parse_date params['last_reviewed'].to_s
 		end
 
 		unless params['creation_date'].blank?
-      format = "%Y-%m-%dT%H:%M:%SZ"
-			@params_options[:creation_date] = DateTime.strptime(params['creation_date'].to_s, format)
+        @params_options[:creation_date] = parse_date params['creation_date'].to_s
 		end
 
 		unless params['location_name'].blank?
@@ -189,4 +186,15 @@ class Api::RequestsController < ApplicationController
     data.original_filename = File.basename(file_name)
     data
   end
+
+  def parse_date date_string
+    format = "%Y-%m-%dT%H:%M:%SZ"
+    date = nil
+    begin
+      date = DateTime.strptime(date_string, format)
+    rescue
+    end
+    date
+  end
+
 end
