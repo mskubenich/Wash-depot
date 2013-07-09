@@ -8,18 +8,43 @@
 
 # Create test users
 
+puts 'Create roles'
+
+Role.destroy_all
+
+Role.create(name: :admin)
+Role.create(name: :regular)
+Role.create(name: :manager)
+
 puts "Users creation"
 
 User.delete_all
 
-User.create(id: 1, :firstname => "John", :lastname => "Carney", :email => "regular@g.com", :password => "123456", 
+regular = User.create(:firstname => "John", :lastname => "Carney", :email => "regular@g.com", :password => "123456",
 			:password_confirmation => "123456")
+regular.roles = [Role.find_by_name(:regular)]
 
-User.create(id: 2, :firstname => "manager", :lastname => "manager", :email => "manager@g.com", 
-			:password => "123456", :password_confirmation => "123456", :user_type => 1)
+manager = User.create(:firstname => "manager", :lastname => "manager", :email => "manager@g.com",
+			:password => "123456", :password_confirmation => "123456")
+manager.roles = [Role.find_by_name(:manager)]
 
-User.create(id: 3, :firstname => "admin", :lastname => "admin", :email => "admin@g.com", 
-			:password => "123456", :password_confirmation => "123456", :user_type => 2)
+admin = User.create(:firstname => "admin", :lastname => "admin", :email => "admin@g.com",
+			:password => "123456", :password_confirmation => "123456")
+admin.roles = [Role.find_by_name(:admin)]
+
+3.times do |t|
+  regular_t = User.create(:firstname => "John", :lastname => "Carney", :email => "regular_#{t}@g.com", :password => "123456",
+                        :password_confirmation => "123456")
+  regular_t.roles = [Role.find_by_name(:regular)]
+
+  manager_t = User.create(:firstname => "manager", :lastname => "manager", :email => "manager_#{t}@g.com",
+                        :password => "123456", :password_confirmation => "123456")
+  manager_t.roles = [Role.find_by_name(:manager)]
+
+  admin_t = User.create(:firstname => "admin", :lastname => "admin", :email => "admin_#{t}@g.com",
+                      :password => "123456", :password_confirmation => "123456")
+  admin_t.roles = [Role.find_by_name(:admin)]
+end
 
 
 puts "Statuses creation"

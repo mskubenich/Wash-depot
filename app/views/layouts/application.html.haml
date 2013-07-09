@@ -33,9 +33,14 @@
               %button.close{type: :button, 'data-dismiss' => 'alert'}
                 &times;
               = flash[:notice]
+          - elsif params[:error]
+            .alert.alert-notice
+              %button.close{type: :button, 'data-dismiss' => 'alert'}
+                &times;
+              = params[:error]
         .row-fluid
-          .span3
+          .span2
             = render partial: 'layouts/sidebar'
-          .span9
+          .span10
             .well
               = yield

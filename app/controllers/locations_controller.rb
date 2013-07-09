@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  load_and_authorize_resource
   def index
     @locations_grid = initialize_grid(Location, per_page: 10)
   end

@@ -1,5 +1,7 @@
 class ClientsController < ApplicationController
   skip_before_filter :require_no_authentication
+  load_and_authorize_resource
+
   def index
     @clients_grid = initialize_grid(User, per_page: 20)
   end

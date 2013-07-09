@@ -1,6 +1,11 @@
 class RequestsController < ApplicationController
+  load_and_authorize_resource
   def index
-    @requests_grid = initialize_grid(Request, include: [:location, :problem_area, :status], per_page: 20)
+    conditions = {}
+    if current_user && current_user.role?(:regular)
+      conditions = {user_id: current_user.id}
+    end
+    @requests_grid = initialize_grid(Request, include: [:location, :problem_area, :status], per_page: 20, :conditions => conditions)
   end
 
   def show
@@ -13,7 +18,7 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(params[:request])
-
+    @request.user = current_user
     respond_to do |format|
       if @request.save
         format.html {

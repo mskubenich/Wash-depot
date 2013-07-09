@@ -19,6 +19,7 @@ gem 'will_paginate'
 gem 'wice_grid'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datetimepicker-rails'
+gem 'cancan'
 
 group :test, :development do
   gem 'rspec-rails'

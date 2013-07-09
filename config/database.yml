@@ -24,7 +24,7 @@ test:
   database: wash_depot_development
   pool: 5
   username: root
-  password: 
+  password: remeta
   host: 127.0.0.1
 
 production:
@@ -34,5 +34,5 @@ production:
   database: wash_depot_development
   pool: 5
   username: root
-  password: 
+  password: remeta
   host: 127.0.0.1

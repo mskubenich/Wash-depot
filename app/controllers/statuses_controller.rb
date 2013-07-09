@@ -1,4 +1,5 @@
 class StatusesController < ApplicationController
+  load_and_authorize_resource
   def index
     @statuses_grid = initialize_grid(Status, per_page: 10)
   end

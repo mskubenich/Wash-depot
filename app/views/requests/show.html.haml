@@ -3,10 +3,9 @@
     .text-left.span8
       Request:
     .text-right.span4
-      = link_to 'Edit', edit_request_path(@request), class: 'btn btn-primary'
+      = link_to 'Edit', edit_request_path(@request), class: 'btn btn-primary' if can? :update, Request
       = link_to 'Back', requests_path, class: 'btn btn-info'
-      = link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-
+      = link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if can? :destroy, Request
 %p
   %b
     Completed:

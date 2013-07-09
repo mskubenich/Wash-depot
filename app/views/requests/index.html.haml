@@ -8,7 +8,7 @@
   - g.column name: 'Completed', attribute: 'completed' do |request|
     - request.completed
   - g.column name: 'Description', attribute: 'description' do |request|
-    - request.description[0..12] if request.description
+    - request.description[0..10] if request.description
   - g.column name: 'Importance', attribute: 'importance' do |request|
     - request.importance
   - g.column name: 'Location', attribute: 'name', model: Location do |request|
@@ -18,5 +18,9 @@
   - g.column name: 'Status', attribute: 'name', model: Status do |request|
     - request.status.name if  request.status
   - g.column do |request|
-    - link_to('Show', request_path(request)) + ' ' + link_to('Edit', edit_request_path(request)) + ' ' + link_to('Destroy', request_path(request), method: :delete, data: { confirm: 'Are you sure?' })
+    - link_to('Show', request_path(request)) if can? :read, request
+  - g.column do |request|
+    - link_to('Edit', edit_request_path(request)) if can? :update, Request
+  - g.column do |request|
+    - link_to('Destroy', request_path(request), method: :delete, data: { confirm: 'Are you sure?' }) if can? :destroy, Request
 

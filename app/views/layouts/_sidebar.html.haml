@@ -2,12 +2,12 @@
   %li
     = link_to 'Home', root_path
   %li
-    = link_to 'Users', clients_path
+    = link_to 'Users', clients_path if can? :manage, User
   %li
-    = link_to 'Requests', requests_path
+    = link_to 'Requests', requests_path if can? :read, Request
   %li
-    = link_to 'Locations', locations_path
+    = link_to 'Locations', locations_path if can? :manage, Location
   %li
-    = link_to 'Problem Areas', problem_areas_path
+    = link_to 'Problem Areas', problem_areas_path if can? :manage, ProblemArea
   %li
-    = link_to 'Statuses', statuses_path
+    = link_to 'Statuses', statuses_path if can? :manage, Status
