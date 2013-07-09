@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   skip_before_filter :require_no_authentication
   def index
-    @clients = User.paginate(:page => params[:page], :per_page => 10)
+    @clients_grid = initialize_grid(User, per_page: 20)
   end
 
   def show

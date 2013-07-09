@@ -1,3 +1,8 @@
+- if @client.errors.any?
+  - @client.errors.full_messages.each do |msg|
+    .alert.alert-error
+      %button.close{type: :button, 'data-dismiss' => 'alert'}
+      = msg
 - url = (@client.id)?client_path(@client):clients_path
 - method = (@client.id)? :put : :post
 = form_for(@client, :url => url, :method => method, class: 'form-horizontal') do |f|
@@ -5,12 +10,12 @@
     .control-label
       FirstName:
     .controls
-      = f.text_field :firstname, class: 'span6'
+      = f.text_field :firstname, class: 'span3'
   .control-group
     .control-label
       Last Name:
     .controls
-      = f.text_field :lastname, class: 'span6', rows: 4
+      = f.text_field :lastname, class: 'span3', rows: 4
   .control-group
     .control-label
       Email:
@@ -25,7 +30,7 @@
     .control-label
       Password Confirmation:
     .controls
-      = f.password_field :password_confirmation, class: 'span6'
+      = f.password_field :password_confirmation, class: 'span3'
   .control-group
     .controls
       = f.submit class: 'btn btn-info'

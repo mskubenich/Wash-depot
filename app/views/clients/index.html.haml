@@ -4,31 +4,14 @@
       Users:
   .text-right.span6
     = link_to 'New User', new_client_path, class: 'btn btn-info'
-= will_paginate @clients
-%table.table.table-striped
-  %tr
-    %th
-      Email
-    %th
-      First Name
-    %th
-      Last Name
-    %th
-      Registered at
-    %th
-  - @clients.each do |user|
-    %tr
-      %td
-        = user.email
-      %td
-        = user.firstname
-      %td
-        = user.lastname
-      %td
-        = user.created_at
-      %td{style: 'text-align: right'}
-        = link_to 'Show', client_path(user), class: 'btn'
-        = link_to 'Edit', edit_client_path(user), class: 'btn btn-primary'
-        = link_to 'Destroy', client_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-= will_paginate @clients
-
+= grid(@clients_grid, upper_pagination_panel: true) do |g|
+  - g.column name: 'Email', attribute: 'email' do |user|
+    - user.email
+  - g.column name: 'First Name', attribute: 'firstname' do |user|
+    - user.firstname
+  - g.column name: 'Last Name', attribute: 'lastname' do |user|
+    - user.lastname
+  - g.column name: 'Created At' do |user|
+    - user.created_at
+  - g.column do |user|
+    - link_to('Show', client_path(user)) + ' ' + link_to('Edit', edit_client_path(user)) + ' ' + link_to('Destroy', client_path(user), method: :delete, data: { confirm: 'Are you sure?' })
