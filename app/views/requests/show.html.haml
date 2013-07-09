@@ -52,7 +52,7 @@
 %p
   %b
     Picture #1:
-    = (image_tag @request.picture1.url, style: 'max-width: 200px; max-height: 150px' ) if @request.picture1
+    = image_tag @request.picture1.url, style: 'max-width: 200px; max-height: 150px'
 %p
   %b
     Picture #2:

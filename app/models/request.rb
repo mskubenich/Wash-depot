@@ -13,13 +13,16 @@ class Request < ActiveRecord::Base
                     :default_url => "/assets/no-photo.jpg",
                     :path => ":rails_root/public/pictures/1/requests/:id/:style/picture1.:extension"
   has_attached_file :picture2,
-                    :url  => "/pictures/2/requests/:id/:style/picture1.:extension",
+                    :url  => "/pictures/2/requests/:id/:style/picture2.:extension",
                     :default_url => "/assets/no-photo.jpg",
-                    :path => ":rails_root/public/pictures/2/requests/:id/:style/picture1.:extension"
+                    :path => ":rails_root/public/pictures/2/requests/:id/:style/picture2.:extension"
   has_attached_file :picture3,
-                    :url  => "/pictures/3/requests/:id/:style/picture1.:extension",
+                    :url  => "/pictures/3/requests/:id/:style/picture3.:extension",
                     :default_url => "/assets/no-photo.jpg",
-                    :path => ":rails_root/public/pictures/3/requests/:id/:style/picture1.:extension"
+                    :path => ":rails_root/public/pictures/3/requests/:id/:style/picture3.:extension"
+
+  validate :least_one_picture
+  validates :description, :presence => true
 
   def as_json(options={})
 
@@ -33,5 +36,12 @@ class Request < ActiveRecord::Base
   	 :last_review => last_reviewed.to_s,
   	 :location => self.location.name
   	}
+  end
+
+
+  private
+
+  def least_one_picture
+    errors.add(:pictures, "must be at least one picture.") if !self.picture1.present? && !self.picture2.present? && !self.picture3.present?
   end
 end
