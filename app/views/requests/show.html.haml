@@ -10,7 +10,7 @@
 %p
   %b
     Completed:
-  = @request.completed
+  = @request.completed ? 'Yes' : 'No'
 %p
   %b
     Creation Date:
@@ -26,11 +26,17 @@
 %p
   %b
     Importance:
-  = @request.importance
+    - case @request.importance
+      - when 0
+        = 'Low'
+      - when 1
+        = 'Normal'
+      - when 2
+        = 'Urgent'
 %p
   %b
     User:
-  = @request.user.email if @request.user
+  = (@request.user.firstname + ' ' + @request.user.lastname)  if @request.user
 %p
   %b
     Status:
@@ -46,12 +52,12 @@
 %p
   %b
     Picture #1:
-    = image_tag @request.picture1.url if @request.picture1
+    = (image_tag @request.picture1.url, style: 'max-width: 200px; max-height: 150px' ) if @request.picture1
 %p
   %b
     Picture #2:
-    = image_tag @request.picture2.url if @request.picture2
+    = image_tag @request.picture2.url, style: 'max-width: 200px; max-height: 150px' if @request.picture2
 %p
   %b
     Picture #3:
-    = image_tag @request.picture3.url if @request.picture3
+    = image_tag @request.picture3.url, style: 'max-width: 200px; max-height: 150px' if @request.picture3

@@ -4,9 +4,8 @@
       Statuses:
   .text-right.span6
     = link_to 'New status', new_status_path, class: 'btn btn-info'
-%span12
-  = grid(@statuses_grid, upper_pagination_panel: true) do |g|
-    - g.column name: 'Name', attribute: 'name'  do |status|
-      - status.name
-    - g.column do |status|
-      - link_to('Show', status_path(status)) + ' ' + link_to('Edit', edit_status_path(status)) + ' ' + link_to('Destroy', status_path(status), method: :delete, data: { confirm: 'Are you sure?' })
+= grid(@statuses_grid, upper_pagination_panel: true) do |g|
+  - g.column name: 'Name', attribute: 'name'  do |status|
+    - status.name
+  - g.column do |status|
+    - link_to('Show', status_path(status)) + ' ' + link_to('Edit', edit_status_path(status)) + ' ' + link_to('Destroy', status_path(status), method: :delete, data: { confirm: 'Are you sure?' })

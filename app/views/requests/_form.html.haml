@@ -3,27 +3,50 @@
     .control-label
       Completed:
     .controls
-      = f.number_field :completed, class: 'span6'
+      = f.check_box :completed
   .control-group
     .control-label
       Description:
     .controls
-      = f.text_area :description, class: 'span6', rows: 4
+      = f.text_area :description, class: 'span6', rows: 3
   .control-group
     .control-label
       Creation Date:
     .controls
-      = f.datetime_select :creation_date, class: 'span3'
+      #datetimepicker1.input-append.date
+        = f.text_field :creation_date, { 'data-format' => 'yyyy-MM-dd hh:mm:ss', 'type' => 'text'}
+        %span.add-on
+          %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
+      :javascript
+          $(function() {
+              $('#datetimepicker1').datetimepicker({
+                  language: 'pt-BR'
+              });
+          });
   .control-group
     .control-label
       Last Reviewed:
     .controls
-      = f.datetime_select :last_reviewed, class: 'span3'
+      #datetimepicker2.input-append.date
+        = f.text_field :last_reviewed, { 'data-format' => 'yyyy-MM-dd hh:mm:ss', 'type' => 'text'}
+        %span.add-on
+          %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
+      :javascript
+          $(function() {
+              $('#datetimepicker2').datetimepicker({
+                  language: 'pt-BR'
+              });
+          });
   .control-group
     .control-label
-      Importance:
+      Importance:   (       case 0: return @"Low";case 1: return @"Normal";case 2:return @"Urgent";)
     .controls
-      = f.number_field :importance, class: 'span6'
+      = f.radio_button :importance, 0, :checked => true
+      Low
+      = f.radio_button :importance, 1
+      Normal
+      = f.radio_button :importance, 2
+      Urgent
   .control-group
     .control-label
       Status:

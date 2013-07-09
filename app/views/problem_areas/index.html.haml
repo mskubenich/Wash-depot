@@ -4,10 +4,9 @@
       Problem Areas:
   .text-right.span6
     = link_to 'New Problem Area', new_problem_area_path, class: 'btn btn-info'
-%span12
-  = grid(@areas_grid, upper_pagination_panel: true) do |g|
-    - g.column name: 'Name', attribute: 'name'  do |area|
-      - area.name
-    - g.column do |area|
-      - link_to('Show', problem_area_path(area)) + ' ' + link_to('Edit', edit_problem_area_path(area)) + ' ' + link_to('Destroy', problem_area_path(area), method: :delete, data: { confirm: 'Are you sure?' })
+= grid(@areas_grid, upper_pagination_panel: true) do |g|
+  - g.column name: 'Name', attribute: 'name'  do |area|
+    - area.name
+  - g.column do |area|
+    - link_to('Show', problem_area_path(area)) + ' ' + link_to('Edit', edit_problem_area_path(area)) + ' ' + link_to('Destroy', problem_area_path(area), method: :delete, data: { confirm: 'Are you sure?' })
 

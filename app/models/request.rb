@@ -10,15 +10,15 @@ class Request < ActiveRecord::Base
 
   has_attached_file :picture1,
                     :url  => "/pictures/1/requests/:id/:style/picture1.:extension",
-                    :default_url => "/assets/noavatar.gif",
+                    :default_url => "/assets/no-photo.jpg",
                     :path => ":rails_root/public/pictures/1/requests/:id/:style/picture1.:extension"
   has_attached_file :picture2,
                     :url  => "/pictures/2/requests/:id/:style/picture1.:extension",
-                    :default_url => "/assets/noavatar.gif",
+                    :default_url => "/assets/no-photo.jpg",
                     :path => ":rails_root/public/pictures/2/requests/:id/:style/picture1.:extension"
   has_attached_file :picture3,
                     :url  => "/pictures/3/requests/:id/:style/picture1.:extension",
-                    :default_url => "/assets/noavatar.gif",
+                    :default_url => "/assets/no-photo.jpg",
                     :path => ":rails_root/public/pictures/3/requests/:id/:style/picture1.:extension"
 
   def as_json(options={})
