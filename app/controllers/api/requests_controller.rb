@@ -3,6 +3,7 @@ class Api::RequestsController < ApplicationController
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
+  before_filter :retrueve_params, :only => :update
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
 
 	def index
@@ -51,32 +52,18 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def update
-		respond_to do |format|
+    respond_to do |format|
       if @request
-        require 'open-uri'
-        image1 = params[:image1]
-        image2 = params[:image2]
-        image3 = params[:image3]
-        auth_token = params[:auth_token]
-        params_string = URI::decode(params[:json_body])
-        @params = JSON.parse(params_string)
-        retrieve_params
-        @params_options[:picture1] = image1
-        @params_options[:picture2] = image2
-        @params_options[:picture3] = image3
-
-        respond_to do |format|
-          if @request.update_attributes(@params_options)
-            format.json {}
-          else
-            format.json {render :json => @request.errors.to_json }
-          end
+        if @request.update_attributes(@params_options)
+          format.json {}
+        else
+          format.json {render :json => @request.errors.to_json }
         end
       else
         format.json { render :json => {success: false, message: 'can\'t find request by id'} }
       end
-		end 
-	end
+    end
+  end
 
 	def destroy
 		respond_to do |format|
