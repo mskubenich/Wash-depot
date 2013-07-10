@@ -3,33 +3,7 @@ class Api::RequestsController < ApplicationController
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
-  before_filter :retrieve_params, :only => [:update, :create]
-  before_filter :retrieve_params_images, :only => [:update, :create]
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
-
-  def create_request
-    require 'open-uri'
-    image1 = params[:image1]
-    image2 = params[:image2]
-    image3 = params[:image3]
-    auth_token = params[:auth_token]
-    params_string = URI::decode(params[:json_body])
-    @params = JSON.parse(params_string)
-    retrieve_params
-    @params_options[:picture1] = image1
-    @params_options[:picture2] = image2
-    @params_options[:picture3] = image3
-
-    user = User.where(:authentication_token => auth_token).first
-    @request = user.requests.build @params_options
-    respond_to do |format|
-      if @request.save
-        format.json {}
-      else
-        format.json {render :json => @request.errors.to_json }
-      end
-    end
-  end
 
 	def index
     respond_to do |format|
@@ -53,24 +27,50 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def create
-    user = User.where(:authentication_token => params[:auth_token]).first
-		@request = user.requests.build @params_options
-	  respond_to do |format|
-			if @request.save
-				format.json {}
-			else
-				format.json {render :json => @request.errors.to_json }
-			end
-		end
+    require 'open-uri'
+    image1 = params[:image1]
+    image2 = params[:image2]
+    image3 = params[:image3]
+    auth_token = params[:auth_token]
+    params_string = URI::decode(params[:json_body])
+    @params = JSON.parse(params_string)
+    retrieve_params
+    @params_options[:picture1] = image1
+    @params_options[:picture2] = image2
+    @params_options[:picture3] = image3
+
+    user = User.where(:authentication_token => auth_token).first
+    @request = user.requests.build @params_options
+    respond_to do |format|
+      if @request.save
+        format.json {}
+      else
+        format.json {render :json => @request.errors.to_json }
+      end
+    end
 	end
 
 	def update
 		respond_to do |format|
       if @request
-        if @request.update_attributes(@params_options)
-          format.json {}
-        else
-          format.json {render :json => @request.errors.to_json }
+        require 'open-uri'
+        image1 = params[:image1]
+        image2 = params[:image2]
+        image3 = params[:image3]
+        auth_token = params[:auth_token]
+        params_string = URI::decode(params[:json_body])
+        @params = JSON.parse(params_string)
+        retrieve_params
+        @params_options[:picture1] = image1
+        @params_options[:picture2] = image2
+        @params_options[:picture3] = image3
+
+        respond_to do |format|
+          if @request.update_attributes(@params_options)
+            format.json {}
+          else
+            format.json {render :json => @request.errors.to_json }
+          end
         end
       else
         format.json { render :json => {success: false, message: 'can\'t find request by id'} }
@@ -124,11 +124,11 @@ class Api::RequestsController < ApplicationController
 	private
 
 	def only_admin_manager
-		render "api/errors/permission_denied" if current_user.user_type == 0
+		render "api/errors/permission_denied" unless (current_user && (current_user.role?(:admin) || current_user.role?(:manager)))
 	end
 
 	def only_admin
-		render "api/errors/permission_denied" if current_user.user_type != 2
+		render "api/errors/permission_denied" unless (current_user && current_user.role?(:admin))
 	end
 
 	def retrieve_params
@@ -183,20 +183,6 @@ class Api::RequestsController < ApplicationController
       @params_options[:id] = params['identifier']
     end
 
-  end
-
-  def retrieve_params_images
-    unless params[:image1].blank?
-      @params_options[:picture1] = decode_base64file params[:image1], 'image/png', 'image.png'
-    end
-
-    unless params[:image2].blank?
-      @params_options[:picture2] = decode_base64file params[:image2], 'image/png', 'image.png'
-    end
-
-    unless params[:image3].blank?
-      @params_options[:picture3] = decode_base64file params[:image3], 'image/png', 'image.png'
-    end
   end
 
 	def get_request
