@@ -8,6 +8,7 @@ class Api::RequestsController < ApplicationController
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
 
   def create_request
+    require 'open-uri'
     image1 = params[:image1]
     image2 = params[:image2]
     image3 = params[:image3]

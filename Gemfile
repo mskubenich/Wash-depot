@@ -20,7 +20,6 @@ gem 'wice_grid'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datetimepicker-rails'
 gem 'cancan'
-gem 'open-uri'
 
 group :test, :development do
   gem 'rspec-rails'
