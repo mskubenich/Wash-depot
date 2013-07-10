@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   skip_before_filter :require_no_authentication
-  load_and_authorize_resource
+  authorize_resource User
 
   def index
     @clients_grid = initialize_grid(User, per_page: 20)
@@ -53,13 +53,13 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @request = Request.find(params[:id])
-    @request.destroy
+    @client = User.find(params[:id])
+    @client.destroy
 
     respond_to do |format|
       format.html {
         flash[:notice] = 'Request was successfully destroyed.'
-        redirect_to requests_url
+        redirect_to clients_url
       }
     end
   end

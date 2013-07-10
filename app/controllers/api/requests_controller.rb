@@ -1,11 +1,23 @@
 class Api::RequestsController < ApplicationController
-
 	respond_to :json
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
-	before_filter :retrieve_params, :only => [:update, :create]
+  before_filter :retrieve_params, :only => [:update, :create, :create_request]
+  before_filter :retrieve_params_images, :only => [:update, :create]
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
+
+  def create_request
+    user = User.where(:authentication_token => params[:auth_token]).first
+    @request = user.requests.build @params_options
+    respond_to do |format|
+      if @request.save
+        format.json {}
+      else
+        format.json {render :json => @request.errors.to_json }
+      end
+    end
+  end
 
 	def index
     respond_to do |format|
@@ -159,6 +171,9 @@ class Api::RequestsController < ApplicationController
       @params_options[:id] = params['identifier']
     end
 
+  end
+
+  def retrieve_params_images
     unless params[:image1].blank?
       @params_options[:picture1] = decode_base64file params[:image1], 'image/png', 'image.png'
     end
@@ -170,7 +185,7 @@ class Api::RequestsController < ApplicationController
     unless params[:image3].blank?
       @params_options[:picture3] = decode_base64file params[:image3], 'image/png', 'image.png'
     end
-	end
+  end
 
 	def get_request
 		@request = Request.find_by_id params[:request_id]
