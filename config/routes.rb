@@ -19,7 +19,7 @@ WashDepot::Application.routes.draw do
     post 'add_picture_to_request', to: 'requests#add_picture_to_request'
     delete 'remove_picture', to: 'requests#remove_picture'
 
-    post 'create_request', to: 'requests#create_request'
+    post 'create_request2', to: 'requests#create_request'
 
     get 'get_lists', to: 'lists#get_lists'
   end

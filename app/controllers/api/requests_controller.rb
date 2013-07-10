@@ -3,12 +3,23 @@ class Api::RequestsController < ApplicationController
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
-  before_filter :retrieve_params, :only => [:update, :create, :create_request]
+  before_filter :retrieve_params, :only => [:update, :create]
   before_filter :retrieve_params_images, :only => [:update, :create]
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
 
   def create_request
-    user = User.where(:authentication_token => params[:auth_token]).first
+    image1 = params[:image1]
+    image2 = params[:image2]
+    image3 = params[:image3]
+    auth_token = params[:auth_token]
+    params_string = URI::decode(params[:json_body])
+    @params = JSON.parse(params_string)
+    retrieve_params
+    @params_options[:picture1] = image1
+    @params_options[:picture2] = image2
+    @params_options[:picture3] = image3
+
+    user = User.where(:authentication_token => auth_token).first
     @request = user.requests.build @params_options
     respond_to do |format|
       if @request.save
@@ -120,7 +131,7 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def retrieve_params
-		
+    params = @params if @params != nil
 		# make available mass assignment
 
 		@params_options = {}
