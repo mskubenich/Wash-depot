@@ -19,4 +19,14 @@ class User < ActiveRecord::Base
   def role?(role)
     !!self.roles.find_by_name(role.to_s.camelize)
   end
+
+  def user_type
+    if role?(:admin)
+      2
+    elsif role?(:manager)
+      1
+    elsif role?(:regular)
+      0
+    end
+  end
 end
