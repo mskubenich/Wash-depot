@@ -3,7 +3,7 @@ class Api::RequestsController < ApplicationController
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
-  before_filter :retrueve_params, :only => :update
+  before_filter :retrieve_params, :only => :update
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
 
 	def index
@@ -119,11 +119,7 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def retrieve_params
-    params = @params if @params != nil
-		# make available mass assignment
-
-		@params_options = {}
-
+    @params_options = {}
 		unless params["current_status"].blank?
 			current_status_name = params["current_status"]
       status = Status.where(:name => current_status_name).first
