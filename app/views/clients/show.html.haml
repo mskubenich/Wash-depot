@@ -15,4 +15,4 @@
 %p
   %b
     Created At:
-  = @client.created_at
+  = @client.created_at.strftime("%m-%d-%Y EST" ) if @client.created_at

@@ -19,13 +19,14 @@
       Creation Date:
     .controls
       #datetimepicker1.input-append.date
-        = f.text_field :creation_date, { 'data-format' => 'yyyy-MM-dd hh:mm:ss', 'type' => 'text'}
+        = f.text_field :creation_date, { 'data-format' => 'MM-dd-yyyy EST', 'type' => 'text'}
         %span.add-on
           %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
       :javascript
           $(function() {
               $('#datetimepicker1').datetimepicker({
-                  language: 'pt-BR'
+                  language: 'pt-BR',
+                  pickTime: false
               });
           });
   .control-group
@@ -33,13 +34,14 @@
       Last Reviewed:
     .controls
       #datetimepicker2.input-append.date
-        = f.text_field :last_reviewed, { 'data-format' => 'yyyy-MM-dd hh:mm:ss', 'type' => 'text'}
+        = f.text_field :last_reviewed, { 'data-format' => 'MM-dd-yyyy EST', 'type' => 'text'}
         %span.add-on
           %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
       :javascript
           $(function() {
               $('#datetimepicker2').datetimepicker({
-                  language: 'pt-BR'
+                  language: 'pt-BR',
+                  pickTime: false
               });
           });
   .control-group

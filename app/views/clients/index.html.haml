@@ -12,7 +12,7 @@
   - g.column name: 'Last Name', attribute: 'lastname' do |user|
     - user.lastname
   - g.column name: 'Created At' do |user|
-    - user.created_at
+    - user.created_at.strftime("%m-%d-%Y EST" )
   - g.column name: 'Role' do |user|
     - select_tag :role, options_for_select(@roles.collect{ |u| [u.name, u.id] }, user.roles.first.id),
                  :user_id => user.id, :onchange => "change_user_role(this);", class: 'span12'

@@ -36,6 +36,8 @@ class RequestsController < ApplicationController
 
   def edit
     @request = Request.find(params[:id])
+    @request.creation_date = @request.creation_date.strftime("%m-%d-%Y EST") if @request.creation_date
+    @request.last_reviewed = @request.last_reviewed.strftime("%m-%d-%Y EST") if @request.last_reviewed
   end
 
   def update
