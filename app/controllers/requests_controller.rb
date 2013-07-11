@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
     if current_user && current_user.role?(:regular)
       conditions = {user_id: current_user.id}
     end
-    @requests_grid = initialize_grid(Request, include: [:location, :problem_area, :status], per_page: 20, :conditions => conditions)
+    @requests_grid = initialize_grid(Request, include: [:location, :problem_area, :status, :importance], per_page: 20, :conditions => conditions)
   end
 
   def show

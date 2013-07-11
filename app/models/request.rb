@@ -1,12 +1,13 @@
 class Request < ActiveRecord::Base
-  attr_accessible :completed, :creation_date, :description, :importance, :last_reviewed,
-  				  :user_id, :status_id, :location_id, :problem_area_id,
+  attr_accessible :completed, :creation_date, :description, :last_reviewed,
+  				  :user_id, :status_id, :location_id, :problem_area_id, :importance_id,
             :picture1, :picture2, :picture3
 
   belongs_to :user
   belongs_to :status
   belongs_to :problem_area
   belongs_to :location
+  belongs_to :importance
 
   has_attached_file :picture1,
                     :url  => "/pictures/1/requests/:id/:style/picture1.:extension",
@@ -22,7 +23,6 @@ class Request < ActiveRecord::Base
                     :path => ":rails_root/public/pictures/3/requests/:id/:style/picture3.:extension"
 
   validate :least_one_picture
-  validates :description, :presence => true
 
   def as_json(options={})
 
@@ -30,7 +30,7 @@ class Request < ActiveRecord::Base
   	 :requested_by => "#{self.user.firstname} #{self.user.lastname}",
   	 :problem_area => self.problem_area.name,
   	 :description => description,
-  	 :priority => importance,
+  	 :priority => importance.name,
   	 :current_status => self.status.name,
   	 :pictures => ["#1, #2, #3"],
   	 :last_review => last_reviewed.to_s,

@@ -73,26 +73,33 @@ Location.create(id: 2, name: "Location 002")
 Location.create(id: 3, name: "Location 003")
 Location.create(id: 4, name: "Location 004")
 
+puts "Importances creation"
+
+Importance.delete_all
+Importance.create(id: 1, name: "Low")
+Importance.create(id: 2, name: "Urgent")
+Importance.create(id: 3, name: "Normal")
+
 puts "Request creation"
 
 Request.delete_all
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem_area_id: 1, 
-			   description: "Conveyor chain is starting to break", importance: 2, status_id: 1, completed: 0, location_id: 1) #pictures !!!
+			   description: "Conveyor chain is starting to break", importance_id: 2, status_id: 1, completed: 0, location_id: 1) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem_area_id: 2, 
-			   description: "Water leak in electrical room", importance: 2, status_id: 1, completed: 0, location_id: 1) #pictures !!!
+			   description: "Water leak in electrical room", importance_id: 2, status_id: 1, completed: 0, location_id: 1) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 2, problem_area_id: 3, 
-			   description: "Mitter curtain is squeaking", importance: 1, status_id: 1, completed: 0, location_id: 1) #pictures !!!
+			   description: "Mitter curtain is squeaking", importance_id: 1, status_id: 1, completed: 0, location_id: 1) #pictures !!!
 
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem_area_id: 1, 
-			   description: "Conveyor chain is starting to break", importance: 2, status_id: 1, completed: 0, location_id: 2) #pictures !!!
+			   description: "Conveyor chain is starting to break", importance_id: 2, status_id: 1, completed: 0, location_id: 2) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem_area_id: 2, 
-			   description: "Water leak in electrical room", importance: 2, status_id: 1, completed: 0, location_id: 2) #pictures !!!
+			   description: "Water leak in electrical room", importance_id: 2, status_id: 1, completed: 0, location_id: 2) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 2, problem_area_id: 3, 
-			   description: "Mitter curtain is squeaking", importance: 1, status_id: 1, completed: 0, location_id: 2) #pictures !!!
+			   description: "Mitter curtain is squeaking", importance_id: 1, status_id: 1, completed: 0, location_id: 2) #pictures !!!
 
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem_area_id: 1, 
-			   description: "Conveyor chain is starting to break", importance: 2, status_id: 1, completed: 0, location_id: 3) #pictures !!!
+			   description: "Conveyor chain is starting to break", importance_id: 2, status_id: 1, completed: 0, location_id: 3) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 1, problem_area_id: 2, 
-			   description: "Water leak in electrical room", importance: 2, status_id: 1, completed: 0, location_id: 3) #pictures !!!
+			   description: "Water leak in electrical room", importance_id: 2, status_id: 1, completed: 0, location_id: 3) #pictures !!!
 Request.create(creation_date: Time.at(rand * Time.now.to_i), user_id: 2, problem_area_id: 3, 
-			   description: "Mitter curtain is squeaking", importance: 1, status_id: 1, completed: 0, location_id: 3) #pictures !!!
+			   description: "Mitter curtain is squeaking", importance_id: 1, status_id: 1, completed: 0, location_id: 3) #pictures !!!

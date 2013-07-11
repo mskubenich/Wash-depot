@@ -1,7 +1,6 @@
 object @request
 
 attributes :id, :completed
-attributes :importance => :priority
 
 node :desc do |request|
 	request.description
@@ -17,6 +16,10 @@ end
 
 node :status do |request|
 	request.status.name
+end
+
+node :importance do |request|
+	request.importance.name if request.importance
 end
 
 node :picture1 do |request|

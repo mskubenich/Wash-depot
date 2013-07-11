@@ -9,3 +9,5 @@
     = link_to 'Problem Areas', problem_areas_path if can? :manage, ProblemArea
   %li
     = link_to 'Statuses', statuses_path if can? :manage, Status
+  %li
+    = link_to 'Importances', importances_path if can? :manage, Importance

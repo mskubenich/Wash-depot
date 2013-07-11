@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709123917) do
+ActiveRecord::Schema.define(:version => 20130711135214) do
+
+  create_table "importances", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -26,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20130709123917) do
   end
 
   create_table "requests", :force => true do |t|
-    t.integer  "importance"
     t.datetime "creation_date"
     t.text     "description"
     t.datetime "last_reviewed"
@@ -49,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20130709123917) do
     t.string   "picture3_content_type"
     t.integer  "picture3_file_size"
     t.datetime "picture3_updated_at"
+    t.integer  "importance_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -85,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130709123917) do
     t.string   "lastname",               :default => ""
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "role_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

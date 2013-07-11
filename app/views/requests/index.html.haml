@@ -9,8 +9,8 @@
     - request.completed
   - g.column name: 'Description', attribute: 'description' do |request|
     - request.description[0..10] if request.description
-  - g.column name: 'Importance', attribute: 'importance' do |request|
-    - request.importance
+  - g.column name: 'Importance', attribute: 'name', model: Importance do |request|
+    - request.importance.name if  request.importance
   - g.column name: 'Location', attribute: 'name', model: Location do |request|
     - request.location.name if  request.location
   - g.column name: 'Problem Area', attribute: 'name', model: ProblemArea do |request|

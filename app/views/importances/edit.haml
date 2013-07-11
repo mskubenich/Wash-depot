@@ -1,0 +1,9 @@
+%h2
+  .row-fluid
+    .text-left.span8
+      Edit Importance
+    .text-right.span4
+      = link_to 'Back', importance_path, class: 'btn btn-info'
+      = link_to 'Show', importance_path(@importance), class: 'btn'
+      = link_to 'Destroy', @importance, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= render 'form'

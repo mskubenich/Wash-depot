@@ -3,7 +3,6 @@ class Api::RequestsController < ApplicationController
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
-  before_filter :retrieve_params, :only => :update
 	before_filter :get_request, :only => [:update, :destroy, :add_picture_to_request]
 
 	def index
@@ -28,6 +27,8 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def create
+    @params = params
+    retrieve_params
     require 'open-uri'
     image1 = params[:image1]
     image2 = params[:image2]
@@ -52,6 +53,8 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def update
+    @params = params
+    retrieve_params
     respond_to do |format|
       if @request
         if @request.update_attributes(@params_options)
@@ -75,39 +78,6 @@ class Api::RequestsController < ApplicationController
 		end
   end
 
-  def add_picture_to_request
-    respond_to do |format|
-      if @request
-        if params[:image1]
-          Picture.create picture: picture, request_id: @request.id
-        end
-        if params[:image2]
-          picture = decode_base64file params[:image2], 'image/png', 'image.png'
-          Picture.create picture: picture, request_id: @request.id
-        end
-        if params[:image2]
-          picture = decode_base64file params[:image3], 'image/png', 'image.png'
-          Picture.create picture: picture, request_id: @request.id
-        end
-        format.json {}
-      else
-        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
-      end
-    end
-  end
-
-  def remove_picture
-    picture = Picture.find_by_id params[:picture_id]
-    respond_to do |format|
-      if picture
-        picture.destroy
-        format.json { render :json => {success: true, message: 'successfully removed image'} }
-      else
-        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
-      end
-    end
-  end
-
 	private
 
 	def only_admin_manager
@@ -119,6 +89,7 @@ class Api::RequestsController < ApplicationController
 	end
 
 	def retrieve_params
+    params = @params if @params != nil
     @params_options = {}
 		unless params["current_status"].blank?
 			current_status_name = params["current_status"]
@@ -153,7 +124,8 @@ class Api::RequestsController < ApplicationController
 		end
 
     unless params['importance'].blank?
-      @params_options[:importance] = params['importance']
+      importance = Importance.where(:name => params['importance']).first
+      @params_options[:importance_id] = importance.id if importance
     end
 
 		unless params['problem_area'].blank?

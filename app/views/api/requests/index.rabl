@@ -1,6 +1,6 @@
 collection @requests, :object_root => false
 
-attributes :id, :creation_date, :completed, :last_reviewed, :importance
+attributes :id, :creation_date, :completed, :last_reviewed
 
 node :desc do |request|
 	request.description
@@ -14,6 +14,10 @@ end
 
 node :status do |request|
 	request.status.name if request.status
+end
+
+node :importance do |request|
+	request.importance.name if request.importance
 end
 
 node :problem_area do |request|

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   before_save :ensure_authentication_token
+  before_create :create_role
 
   has_many :requests
   has_many :users_roles
@@ -28,5 +29,11 @@ class User < ActiveRecord::Base
     elsif role?(:regular)
       0
     end
+  end
+
+  private
+
+  def create_role
+    self.roles << Role.find_by_name(:regular)
   end
 end

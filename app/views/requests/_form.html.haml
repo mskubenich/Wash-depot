@@ -48,12 +48,7 @@
     .control-label
       Importance:
     .controls
-      = f.radio_button :importance, 0, :checked => true
-      Low
-      = f.radio_button :importance, 1
-      Normal
-      = f.radio_button :importance, 2
-      Urgent
+      = f.select :importance_id, options_for_select(Importance.all.collect{ |importance| [importance.name, importance.id] }), class: 'span6'
   .control-group
     .control-label
       Status:

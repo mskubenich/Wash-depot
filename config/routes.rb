@@ -15,8 +15,6 @@ WashDepot::Application.routes.draw do
     post 'get_request', to: 'requests#show'
     post 'update_request', to: 'requests#update'
     delete 'remove_request', to: 'requests#destroy'
-    post 'add_picture_to_request', to: 'requests#add_picture_to_request'
-    delete 'remove_picture', to: 'requests#remove_picture'
 
     get 'get_lists', to: 'lists#get_lists'
   end
@@ -29,6 +27,7 @@ WashDepot::Application.routes.draw do
   resources :requests
   resources :clients
   post '/change_user_role', :to => "clients#change_user_role"
+  resources :importances
 
   root :to => 'requests#index'
 

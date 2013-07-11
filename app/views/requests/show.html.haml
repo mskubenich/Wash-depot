@@ -25,13 +25,7 @@
 %p
   %b
     Importance:
-    - case @request.importance
-      - when 0
-        = 'Low'
-      - when 1
-        = 'Normal'
-      - when 2
-        = 'Urgent'
+    = @request.importance.name if @request.importance
 %p
   %b
     User:

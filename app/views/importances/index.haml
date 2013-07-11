@@ -1,0 +1,11 @@
+.row-fluid
+  .text-left.span6
+    %h2
+      Importances:
+  .text-right.span6
+    = link_to 'New importance', new_importance_path, class: 'btn btn-info'
+= grid(@importances_grid, upper_pagination_panel: true) do |g|
+  - g.column name: 'Name', attribute: 'name'  do |importance|
+    - importance.name
+  - g.column do |importance|
+    - link_to('Show', importance_path(importance)) + ' ' + link_to('Edit', edit_importance_path(importance)) + ' ' + link_to('Destroy', importance_path(importance), method: :delete, data: { confirm: 'Are you sure?' })
