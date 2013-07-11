@@ -7,9 +7,11 @@ class Api::ListsController < ApplicationController
       @locations = Location.all
       @areas = ProblemArea.all
       @statuses = Status.all
+      @importances = Importance.all
       @locations_names = []
       @areas_names = []
       @statuses_names = []
+      @importances_names = []
       @locations.each do |location|
         @locations_names << location.name
       end
@@ -19,7 +21,10 @@ class Api::ListsController < ApplicationController
       @statuses.each do |status|
         @statuses_names << status.name
       end
-      format.json{render :json => {locations: @locations_names, problem_areas: @areas_names, statuses: @statuses_names}}
+      @importances.each do |importance|
+        @importances_names << importance.name
+      end
+      format.json{render :json => {locations: @locations_names, problem_areas: @areas_names, statuses: @statuses_names, importances: @importances_names}}
     end
   end
 

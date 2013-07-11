@@ -98,7 +98,7 @@ request GET:
 
 response:
 
-    {"locations":["Location 002","test2"],"problem_areas":["Wheel Blasters","Plumbing Water 45","POS System","test","name","test2"],"statuses":["Queuedhvfg","Parts
+    {"locations":["Location 002","test2"],"importances":["dfgf","test2"],"problem_areas":["Wheel Blasters","Plumbing Water 45","POS System","test","name","test2"],"statuses":["Queuedhvfg","Parts
     Ordered","Scheduled","Under Review","test","wrg","rtdhsatrs","rgws","thbe","ethsts","tehst"]}
 
 
