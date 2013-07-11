@@ -1,7 +1,5 @@
 %ul.nav.nav-tabs.nav-stacked
   %li
-    = link_to 'Home', root_path
-  %li
     = link_to 'Users', clients_path if can? :manage, User
   %li
     = link_to 'Requests', requests_path if can? :read, Request
