@@ -13,5 +13,8 @@
     - user.lastname
   - g.column name: 'Created At' do |user|
     - user.created_at
+  - g.column name: 'Role' do |user|
+    - select_tag :role, options_for_select(@roles.collect{ |u| [u.name, u.id] }, user.roles.first.id),
+                 :user_id => user.id, :onchange => "change_user_role(this);", class: 'span12'
   - g.column do |user|
     - link_to('Show', client_path(user)) + ' ' + link_to('Edit', edit_client_path(user)) + ' ' + link_to('Destroy', client_path(user), method: :delete, data: { confirm: 'Are you sure?' })

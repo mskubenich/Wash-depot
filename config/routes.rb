@@ -29,6 +29,7 @@ WashDepot::Application.routes.draw do
   resources :statuses
   resources :requests
   resources :clients
+  post '/change_user_role', :to => "clients#change_user_role"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
