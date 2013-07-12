@@ -6,51 +6,56 @@
       = link_to 'Edit', edit_request_path(@request), class: 'btn btn-primary' if can? :update, Request
       = link_to 'Back', requests_path, class: 'btn btn-info'
       = link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if can? :destroy, Request
-%p
-  %b
-    Completed:
-  = @request.completed ? 'Yes' : 'No'
-%p
-  %b
-    Creation Date:
-  = @request.creation_date.strftime("%m-%d-%Y EST" ) if @request.creation_date
-%p
-  %b
-    Description:
-  = @request.description
-%p
-  %b
-    Last reviewed:
-  = @request.last_reviewed.strftime("%m-%d-%Y EST" ) if @request.last_reviewed
-%p
-  %b
-    Importance:
+.row-fluid
+  .span2.text-right
+    %b Completed:
+    %br
+    %b Creation Date:
+    %br
+    %b Description:
+    %br
+    %b Last reviewed:
+    %br
+    %b Importance:
+    %br
+    %b User:
+    %br
+    %b Status:
+    %br
+    %b Location:
+    %br
+    %b Problem Area:
+  .span3
+    = @request.completed ? 'Yes' : 'No'
+    %br
+    = @request.creation_date.strftime("%m-%d-%Y EST" ) if @request.creation_date
+    %br
+    = @request.description
+    %br
+    = @request.last_reviewed.strftime("%m-%d-%Y EST" ) if @request.last_reviewed
+    %br
     = @request.importance.name if @request.importance
-%p
-  %b
-    User:
-  = (@request.user.firstname + ' ' + @request.user.lastname)  if @request.user
-%p
-  %b
-    Status:
-  = @request.status.name if @request.status
-%p
-  %b
-    Location:
-  = @request.location.name if @request.location
-%p
-  %b
-    Problem Area:
-  = @request.problem_area.name if @request.problem_area
-%p
-  %b
-    Picture #1:
-    = image_tag @request.picture1.url, style: 'max-width: 200px; max-height: 150px'
-%p
-  %b
-    Picture #2:
-    = image_tag @request.picture2.url, style: 'max-width: 200px; max-height: 150px' if @request.picture2
-%p
-  %b
-    Picture #3:
-    = image_tag @request.picture3.url, style: 'max-width: 200px; max-height: 150px' if @request.picture3
+    %br
+    = (@request.user.firstname + ' ' + @request.user.lastname)  if @request.user
+    %br
+    = @request.status.name if @request.status
+    %br
+    = @request.location.name if @request.location
+    %br
+    = @request.problem_area.name if @request.problem_area
+  .span7
+%br
+.row-fluid
+  .span12
+    #myCarousel.carousel.slide
+      .carousel-inner
+        .active.item
+          = image_tag(@request.picture1.url, style: 'width: 100%')
+        .item
+          = image_tag(@request.picture2.url, style: 'width: 100%')
+        .item
+          = image_tag(@request.picture3.url, style: 'width: 100%')
+      %a.carousel-control.left{href: "#myCarousel", 'data-slide' => "prev"}
+        &lsaquo;
+      %a.carousel-control.right{href: "#myCarousel", 'data-slide' => "next"}
+        &rsaquo;
