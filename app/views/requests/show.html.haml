@@ -26,7 +26,7 @@
     %br
     %b Problem Area:
   .span3
-    = @request.completed ? 'Yes' : 'No'
+    = (@request.completed == 1) ? 'Yes' : 'No'
     %br
     = @request.creation_date.strftime("%m-%d-%Y EST" ) if @request.creation_date
     %br
