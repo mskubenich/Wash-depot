@@ -48,22 +48,22 @@
     .control-label
       Importance:
     .controls
-      = f.select :importance_id, options_for_select(Importance.all.collect{ |importance| [importance.name, importance.id] }), class: 'span6'
+      = f.select :importance_id, options_for_select(Importance.all.collect{ |importance| [importance.name, importance.id] }, @request.importance_id), class: 'span6'
   .control-group
     .control-label
       Status:
     .controls
-      = f.select :status_id, options_for_select(Status.all.collect{ |status| [status.name, status.id] }), class: 'span6'
+      = f.select :status_id, options_for_select(Status.all.collect{ |status| [status.name, status.id] } , @request.status_id), class: 'span6'
   .control-group
     .control-label
       Location:
     .controls
-      = f.select :location_id, options_for_select(Location.all.collect{ |location| [location.name, location.id] }), class: 'span6'
+      = f.select :location_id, options_for_select(Location.all.collect{ |location| [location.name, location.id] }, @request.location_id), class: 'span6'
   .control-group
     .control-label
       Problem Area:
     .controls
-      = f.select :problem_area_id, options_for_select(ProblemArea.all.collect{ |area| [area.name, area.id] }), class: 'span6'
+      = f.select :problem_area_id, options_for_select(ProblemArea.all.collect{ |area| [area.name, area.id] },  @request.problem_area_id), class: 'span6'
   .control-group
     .control-label
       Picture #1:
