@@ -50,11 +50,11 @@
     #myCarousel.carousel.slide
       .carousel-inner
         .active.item
-          = image_tag(@request.picture1.url, style: 'width: 100%')
+          = image_tag(@request.picture1.url, style: 'max-width: 100%')
         .item
-          = image_tag(@request.picture2.url, style: 'width: 100%')
+          = image_tag(@request.picture2.url, style: 'max-width: 100%')
         .item
-          = image_tag(@request.picture3.url, style: 'width: 100%')
+          = image_tag(@request.picture3.url, style: 'max-width: 100%')
       %a.carousel-control.left{href: "#myCarousel", 'data-slide' => "prev"}
         &lsaquo;
       %a.carousel-control.right{href: "#myCarousel", 'data-slide' => "next"}

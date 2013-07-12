@@ -20,6 +20,7 @@
 //= require twitter/bootstrap/bootstrap-button
 //= require twitter/bootstrap/bootstrap-collapse
 //= require twitter/bootstrap/bootstrap-carousel
+//= require bootstrap-fileupload.min
 //= require bootstrap-datetimepicker
 
 $(document).ready(function(){

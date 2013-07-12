@@ -4,81 +4,101 @@
       %button.close{type: :button, 'data-dismiss' => 'alert'}
       = msg
 = form_for(@request, class: 'form-horizontal') do |f|
-  .control-group
-    .control-label
-      Completed:
-    .controls
-      = f.check_box :completed
-  .control-group
-    .control-label
-      Description:
-    .controls
-      = f.text_area :description, class: 'span6', rows: 3
-  .control-group
-    .control-label
-      Creation Date:
-    .controls
-      #datetimepicker1.input-append.date
-        = f.text_field :creation_date, { 'data-format' => 'MM-dd-yyyy EST', 'type' => 'text'}
-        %span.add-on
-          %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
-      :javascript
-          $(function() {
-              $('#datetimepicker1').datetimepicker({
-                  language: 'pt-BR',
-                  pickTime: false
-              });
-          });
-  .control-group
-    .control-label
-      Last Reviewed:
-    .controls
-      #datetimepicker2.input-append.date
-        = f.text_field :last_reviewed, { 'data-format' => 'MM-dd-yyyy EST', 'type' => 'text'}
-        %span.add-on
-          %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
-      :javascript
-          $(function() {
-              $('#datetimepicker2').datetimepicker({
-                  language: 'pt-BR',
-                  pickTime: false
-              });
-          });
-  .control-group
-    .control-label
-      Importance:
-    .controls
-      = f.select :importance_id, options_for_select(Importance.all.collect{ |importance| [importance.name, importance.id] }, @request.importance_id), class: 'span6'
-  .control-group
-    .control-label
-      Status:
-    .controls
-      = f.select :status_id, options_for_select(Status.all.collect{ |status| [status.name, status.id] } , @request.status_id), class: 'span6'
-  .control-group
-    .control-label
-      Location:
-    .controls
-      = f.select :location_id, options_for_select(Location.all.collect{ |location| [location.name, location.id] }, @request.location_id), class: 'span6'
-  .control-group
-    .control-label
-      Problem Area:
-    .controls
-      = f.select :problem_area_id, options_for_select(ProblemArea.all.collect{ |area| [area.name, area.id] },  @request.problem_area_id), class: 'span6'
-  .control-group
-    .control-label
-      Picture #1:
-    .controls
-      = f.file_field :picture1, class: 'span6'
-  .control-group
-    .control-label
-      Picture #2:
-    .controls
-      = f.file_field :picture2, class: 'span6'
-  .control-group
-    .control-label
-      Picture #3:
-    .controls
-      = f.file_field :picture3, class: 'span6'
-  .control-group
-    .controls
-      = f.submit class: 'btn btn-info'
+  %table
+    %tr
+      %td
+        Completed:
+      %td
+        = f.check_box :completed
+    %tr
+      %td
+        Description:
+      %td
+        = f.text_area :description, class: 'span12', rows: 3
+    %tr
+      %td
+        Creation Date:
+      %td
+        #datetimepicker1.input-append.date
+          = f.text_field :creation_date, { 'data-format' => 'MM-dd-yyyy EST', 'type' => 'text'}
+          %span.add-on
+            %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
+        :javascript
+            $(function() {
+                $('#datetimepicker1').datetimepicker({
+                    language: 'pt-BR',
+                    pickTime: false
+                });
+            });
+    %tr
+      %td
+        Last Reviewed:
+      %td
+        #datetimepicker2.input-append.date
+          = f.text_field :last_reviewed, { 'data-format' => 'MM-dd-yyyy EST', 'type' => 'text'}
+          %span.add-on
+            %i{ 'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
+        :javascript
+            $(function() {
+                $('#datetimepicker2').datetimepicker({
+                    language: 'pt-BR',
+                    pickTime: false
+                });
+            });
+    %tr
+      %td
+        Importance:
+      %td
+        = f.select :importance_id, options_for_select(Importance.all.collect{ |importance| [importance.name, importance.id] }, @request.importance_id), class: 'span6'
+    %tr
+      %td
+        Status:
+      %td
+        = f.select :status_id, options_for_select(Status.all.collect{ |status| [status.name, status.id] } , @request.status_id), class: 'span6'
+    %tr
+      %td
+        Location:
+      %td
+        = f.select :location_id, options_for_select(Location.all.collect{ |location| [location.name, location.id] }, @request.location_id), class: 'span6'
+    %tr
+      %td
+        Problem Area:
+      %td
+        = f.select :problem_area_id, options_for_select(ProblemArea.all.collect{ |area| [area.name, area.id] },  @request.problem_area_id), class: 'span6'
+    %tr
+      %td
+        Picture #1:
+      %td
+        .fileupload.fileupload-new{'data-provides' => 'fileupload'}
+          .fileupload-preview.fileupload-exists.thumbnail{style: 'max-width: 200px; max-height: 150px; line-height: 20px;'}
+            = image_tag @request.picture1.url, style: 'max-width: 200px; max-height: 150px;'
+          %div
+            = f.file_field :picture1
+            %a{href: "#", class: "btn fileupload-exists", 'data-dismiss' => 'fileupload'}
+              Remove
+    %tr
+      %td
+        Picture #2:
+      %td
+        .fileupload.fileupload-new{'data-provides' => 'fileupload'}
+          .fileupload-preview.fileupload-exists.thumbnail{style: 'max-width: 200px; max-height: 150px; line-height: 20px;'}
+            = image_tag @request.picture2.url, style: 'max-width: 200px; max-height: 150px;'
+          %div
+            = f.file_field :picture2
+            %a{href: "#", class: "btn fileupload-exists", 'data-dismiss' => 'fileupload'}
+              Remove
+    %tr
+      %td
+        Picture #3:
+      %td
+        .fileupload.fileupload-new{'data-provides' => 'fileupload'}
+          .fileupload-preview.fileupload-exists.thumbnail{style: 'max-width: 200px; max-height: 150px; line-height: 20px;'}
+            = image_tag @request.picture3.url, style: 'max-width: 200px; max-height: 150px;'
+          %div
+            = f.file_field :picture3
+            %a{href: "#", class: "btn fileupload-exists", 'data-dismiss' => 'fileupload'}
+              Remove
+    %tr
+      %td
+        = f.submit class: 'btn btn-info'
+      %td

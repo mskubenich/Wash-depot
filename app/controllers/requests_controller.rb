@@ -42,6 +42,18 @@ class RequestsController < ApplicationController
 
   def update
     @request = Request.find(params[:id])
+    if params[:request][:picture1] == ""
+      params[:request].delete(:picture1)
+      @request.picture1.destroy if @request.picture1
+    end
+    if params[:request][:picture2] == ""
+      params[:request].delete(:picture2)
+      @request.picture2.destroy if @request.picture2
+    end
+    if params[:request][:picture1] == ""
+      params[:request].delete(:picture1)
+      @request.picture3.destroy if @request.picture3
+    end
     respond_to do |format|
       if @request.update_attributes(params[:request])
         flash[:success] = 'Request was successfully updated.'
