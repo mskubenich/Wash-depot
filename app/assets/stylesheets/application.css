@@ -9,6 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require twitter-bootstrap-static/bootstrap
+ *= require twitter-bootstrap-static/fontawesome
+ *= require twitter-bootstrap-static/sprites
  *= require bootstrap-datetimepicker
+ *= require wice_grid
  */

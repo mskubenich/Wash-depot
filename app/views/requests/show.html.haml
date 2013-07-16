@@ -1,3 +1,5 @@
+= javascript_include_tag 'lightbox/js/lightbox-2.6.min.js'
+= stylesheet_link_tag 'lightbox/css/lightbox.css'
 %h2
   .row-fluid
     .text-left.span8
@@ -25,7 +27,7 @@
     %b Location:
     %br
     %b Problem Area:
-  .span3
+  .span10
     = (@request.completed == 1) ? 'Yes' : 'No'
     %br
     = @request.creation_date.strftime("%m-%d-%Y EST" ) if @request.creation_date
@@ -43,19 +45,7 @@
     = @request.location.name if @request.location
     %br
     = @request.problem_area.name if @request.problem_area
-  .span7
-%br
-.row-fluid
-  .span12
-    #myCarousel.carousel.slide
-      .carousel-inner
-        .active.item
-          = image_tag(@request.picture1.url, style: 'max-width: 100%')
-        .item
-          = image_tag(@request.picture2.url, style: 'max-width: 100%')
-        .item
-          = image_tag(@request.picture3.url, style: 'max-width: 100%')
-      %a.carousel-control.left{href: "#myCarousel", 'data-slide' => "prev"}
-        &lsaquo;
-      %a.carousel-control.right{href: "#myCarousel", 'data-slide' => "next"}
-        &rsaquo;
+%div
+  = link_to(image_tag(@request.picture1.url, style: 'height: 200px', class: 'img-polaroid'),  @request.picture1.url, 'data-lightbox' => "roadtrip") if @request.picture1.exists?
+  = link_to(image_tag(@request.picture2.url, style: 'height: 200px', class: 'img-polaroid'),  @request.picture2.url, 'data-lightbox' => "roadtrip") if @request.picture2.exists?
+  = link_to(image_tag(@request.picture3.url, style: 'height: 200px', class: 'img-polaroid'),  @request.picture3.url, 'data-lightbox' => "roadtrip") if @request.picture3.exists?

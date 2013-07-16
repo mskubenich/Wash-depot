@@ -11,13 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
-//= require_tree .
 //= require wice_grid
 //= require twitter/bootstrap/bootstrap-transition
-//= require twitter/bootstrap/bootstrap-alert
 //= require twitter/bootstrap/bootstrap-modal
-//= require twitter/bootstrap/bootstrap-button
 //= require twitter/bootstrap/bootstrap-collapse
 //= require twitter/bootstrap/bootstrap-carousel
 //= require bootstrap-fileupload.min
