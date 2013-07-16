@@ -9,7 +9,7 @@
     = csrf_meta_tags
   %body
     .row-fluid
-      .span8.offset2
+      .span10.offset1
         .page-header
           .row-fluid
             .span5
@@ -17,6 +17,9 @@
                 SparkingImage
             .span7.text-right
               = render partial: 'layouts/authentication'
+        .row-fluid
+          .span12
+            = render partial: 'layouts/sidebar'
         .row-fluid
           - if flash[:error]
             .alert.alert-error
@@ -39,8 +42,6 @@
                 &times;
               = params[:error]
         .row-fluid
-          .span2
-            = render partial: 'layouts/sidebar'
-          .span10
+          .span12
             .well{style: 'overflow-x: auto'}
               = yield

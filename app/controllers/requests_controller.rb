@@ -1,5 +1,10 @@
 class RequestsController < ApplicationController
   load_and_authorize_resource
+
+  def tab
+    'requests'
+  end
+
   def index
     conditions = {}
     if current_user && current_user.role?(:regular)

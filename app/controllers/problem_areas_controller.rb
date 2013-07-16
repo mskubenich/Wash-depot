@@ -1,5 +1,10 @@
 class ProblemAreasController < ApplicationController
   load_and_authorize_resource
+
+  def tab
+    'problem_areas'
+  end
+
   def index
     @areas_grid = initialize_grid(ProblemArea, per_page: 10)
   end

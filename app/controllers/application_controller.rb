@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url(error: 'Acces Denied!')
   end
 
+  def tab
+    nil
+  end
+
 end

@@ -1,5 +1,10 @@
 class ImportancesController < ApplicationController
   load_and_authorize_resource
+
+  def tab
+    'importances'
+  end
+
   def index
     @importances_grid = initialize_grid(Importance, per_page: 10)
   end

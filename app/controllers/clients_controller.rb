@@ -2,6 +2,10 @@ class ClientsController < ApplicationController
   skip_before_filter :require_no_authentication
   authorize_resource User
 
+  def tab
+    'users'
+  end
+
   def index
     @clients_grid = initialize_grid(User, per_page: 20)
     @roles = Role.all

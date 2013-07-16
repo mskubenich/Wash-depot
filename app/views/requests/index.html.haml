@@ -3,10 +3,10 @@
     %h2
       Requests:
   .text-right.span6
-    = link_to 'New Request', new_request_path, class: 'btn btn-info'
+    = link_to 'New Request', new_request_path, class: 'btn btn-info' if can? :create, Request
 = grid(@requests_grid, upper_pagination_panel: true) do |g|
   - g.column name: 'Completed', attribute: 'completed' do |request|
-    - request.completed
+    - (request.completed == 1)?'Completed':'Uncompleted'
   - g.column name: 'Description', attribute: 'description' do |request|
     - request.description[0..10] if request.description
   - g.column name: 'Importance', attribute: 'name', model: Importance do |request|
