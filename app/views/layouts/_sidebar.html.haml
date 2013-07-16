@@ -1,15 +1,17 @@
-.navbar
-  .navbar-inner
-    %ul.nav
-      %li{:class => ('active' if controller.tab == 'users')}
-        = link_to 'Users', clients_path if can? :manage, User
-      %li{:class => ('active' if controller.tab == 'requests')}
-        = link_to 'Requests', requests_path if can? :read, Request
-      %li{:class => ('active' if controller.tab == 'locations')}
-        = link_to 'Locations', locations_path if can? :manage, Location
-      %li{:class => ('active' if controller.tab == 'problem_areas')}
-        = link_to 'Problem Areas', problem_areas_path if can? :manage, ProblemArea
-      %li{:class => ('active' if controller.tab == 'statuses')}
-        = link_to 'Statuses', statuses_path if can? :manage, Status
-      %li{:class => ('active' if controller.tab == 'importances')}
-        = link_to 'Importances', importances_path if can? :manage, Importance
+- if current_user
+  .navbar
+    .navbar-inner
+      %ul.nav
+        %li{:class => ('active' if controller.tab == 'users')}
+          = link_to 'Users', clients_path if can? :manage, User
+        %li{:class => ('active' if controller.tab == 'requests')}
+          = link_to 'Requests', requests_path if can? :read, Request
+        %li{:class => ('active' if controller.tab == 'locations')}
+          = link_to 'Locations', locations_path if can? :manage, Location
+        %li{:class => ('active' if controller.tab == 'problem_areas')}
+          = link_to 'Problem Areas', problem_areas_path if can? :manage, ProblemArea
+        %li{:class => ('active' if controller.tab == 'statuses')}
+          = link_to 'Statuses', statuses_path if can? :manage, Status
+        %li{:class => ('active' if controller.tab == 'importances')}
+          = link_to 'Importances', importances_path if can? :manage, Importance
+

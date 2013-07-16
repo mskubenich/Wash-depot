@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery_ujs
 //= require wice_grid
 //= require twitter/bootstrap/bootstrap-transition
 //= require twitter/bootstrap/bootstrap-modal
@@ -18,7 +19,3 @@
 //= require twitter/bootstrap/bootstrap-carousel
 //= require bootstrap-fileupload.min
 //= require bootstrap-datetimepicker
-
-$(document).ready(function(){
-    $('.carousel').carousel();
-});
