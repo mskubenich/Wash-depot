@@ -14,4 +14,3 @@
           = link_to 'Statuses', statuses_path if can? :manage, Status
         %li{:class => ('active' if controller.tab == 'importances')}
           = link_to 'Importances', importances_path if can? :manage, Importance
-
