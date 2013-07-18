@@ -1,104 +1,61 @@
-== Application Wash Depot ==
+== Application Wash Depot
 
-Currently there are 3 types of users:
-	user (type = 0)
-	manager (type = 1)
-	admin (type = 2)
-
-Level of Importnace:
-	0 = Low
-	1 = Normal
-	2 = Urgent
-
-Last Reviewed:
-	"" = not yet reviewed.
-
-Completed:
-	0 = Pending
-
-== Request & Responses ==
-
-User sign in:(method POST request JSON)
-
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST
-    -d "{\"user\":{\"email\":\"admin@g.com\",\"password\":\"123456\"}}" http://localhost:3000/api/sessions
-
-response:
-
-    success: {"success":true,"info":"Logged in","data":{"auth_token":"MhNypzbto5xsiqBYV1v2","email":"suser@washdepot.com"}}
-    error: {"success":false,"info":"Login Failed","data":{}}
-
-User sign out:(method DELETE request JSON)
-
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"auth_token\":\"WS7Cyejzruqfz6pQDw2i\"}"
-    http://localhost:3000/api/sessions
-
-response
-
-    success:{"success":true,"info":"Logged out","data":{}}
-    error:{"success":false,"info":"Login Failed","data":{}}
-
-= Requests API
-upload request:(method POST request JSON)
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"location_name\":\"Location 001\",\"creation_date\":\"20
-    04-03-07T13:17:10Z\",\"desc\": \"Con\",\"priority\": \"2\",\"last_reviewed\": \"56\",\"problem_area\":\"Conveyor Chain\",\"current_status\": \"Queued\", \"image
-    1\":\"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKFJREFUeNrs2MENgCAMBdDWuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz
-    4qiwi1OAM1Os3CxtgC3o/cZ71e1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXqMYdbUnAcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8qgAEGGGA6cwowAL
-    UVIcRv2fVmAAAAAElFTkSuQmCC\"}" http://localhost:3000/api/create_request?auth_token=R99sXqx6m1PedsCkwwag
-
-response:
-    {"id":53,"completed":null,"priority":2,"picture1_id":21,"picture2_id":null,"picture3_id":null,"creation_date":"2004","desc":"Con","problem_area":"Conveyor Chain
-    ","status":"Queued","last_review":"56","location":"Location 001"}
-
-(outdated)get request:(method POST request JSON)
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"100\"}" http://localhost:3000/api/get_request?auth_token=Tx9EbsW6wyimRSRHSgQd
-
-response:
-
-    {"request":{"id":100,"completed":null,"description":"Con","priority":2,"creation_date":"1078665430","problem_area":"Conveyor Chain","status":"Queued","last_revi
-    ew":"","location":null,"pictures":[{"picture":{"id":81,"body":"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0\nd2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAA
-    AAKFJREFUeNrs2MENgCAMBdDW\nuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e\n1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXq\nMYdbUnAcO
-    5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8q\ngAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\n"}}]}}
-
-get requests:(method POST, request JSON)
-
-    curl -X POST -d "" http://localhost:3000/api/get_requests_list?auth_token=R99sXqx6m1PedsCkwwag
-
-response:
-
-    [{{"id":53,"creation_date":"1970-01-01T00:33:24Z","completed":null,"last_reviewed":"1970-01-01T00:00:56Z","priority":2,"desc":"Con","status":"Queued","pro
-    blem_area":"Conveyor Chain","location":"Location 001","picture1":"iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0\nd2FyZQBBZG9iZSBJbWFnZVJlYWR5ccll
-    PAAAAKFJREFUeNrs2MENgCAMBdDW\nuIdjOY1B2caxnKTKjZgIAhYJ+U08yeHlGz4qiwi1OAM1Os3CxtgC3o/cZ71e\n1/Z0U+bpt8QczKgl5of3cp3ccBRK7o/EbElymjBTgtPelcYDJeFq1IXNwdXq\nMYdbUn
-    AcO5K8HsvZlRToMe6z+TOGv0gUhzhggAEGGGCA9fpdmfpW0H1ijJ8q\ngAEGGGA6cwowALUVIcRv2fVmAAAAAElFTkSuQmCC\n","picture2":null,"picture3_id":null}]
-
-(outdated)update request:(method POST, request JSON)
-
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"request_id\":\"105\",\"location\":\"sfdf\", \"creation_date\":\"2004-03-07T13:17:10Z\",\"description\": \"Con(changed)\",\"importance\": \"Low\",\"last_reviewed\": \"\",\"problem_area\":\"dfdf\",\"curent_status\": \"dgfd\"}" http://localhost:3000/api/update_request?auth_token=Tx9EbsW6wyimRSRHSgQd
-
-response:
-
-    {"request":{"id":105,"completed":null,"description":"Con(changed)","priority":2,"creation_date":"2004","problem_area":null,"status":null,"last_review":"","locat
-    ion":null,"pictures":[{"picture":{"id":86}}]}}
-
-remove request:(method DELETE, request JSON)
-
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"request_id\":\"93\"}" http://localhost:3000/api/remov
-    e_request?auth_token=Tx9EbsW6wyimRSRHSgQd
-
-response:
-
-    {"success":true,"message":"successfully deleted request"}
-
-
-= Lists API
-
-request GET:
-
-    curl -X GET -d "" http://localhost:3000/api/get_lists?auth_token=jAdC38p3qhWDDn7eC6FP
-
-response:
-
-    {"locations":["Location 002","test2"],"importances":["dfgf","test2"],"problem_areas":["Wheel Blasters","Plumbing Water 45","POS System","test","name","test2"],"statuses":["Queuedhvfg","Parts
-    Ordered","Scheduled","Under Review","test","wrg","rtdhsatrs","rgws","thbe","ethsts","tehst"]}
+===Api
+====Headers
+    "Accept: application/json"
+    "Content-Type: application/json"
+===Sessions
+====sign_in(method POST)
+    url: http://localhost:3000/api/sessions
+    data: {"user":"{:email=>"admi9n@g.com", :password=>"pass"}"}
+    response:
+        success: {"success"=>true, "info"=>"Logged in", "data"=>{"auth_token"=>"6wy9OLzUgkotplb93pFQGFWhJa2Yf9", "email"=>"admin@g.com", "user_type"=>"2"}, "status"=>401}
+        error: {"errors"=>"invalid login or password", "success"=>false, "status"=>401}
+====sign_out(method DELETE)
+    url: http://localhost:3000/api/sessions
+    data: {"auth_token":"mGQ0Y1BNVxY3JVNtR2h7JuZEhjYK3O"}
+    response:
+        success: {"success"=>true, "info"=>"Logged out", "status"=>200}
+        error: {"errors"=>"session invalid or expired", "success"=>false, "status"=>401}
+===Requests
+====upload request(method POST)
+    url: http://localhost:3000/api/create_request.json
+    data: {"auth_token":"DVHLC5mGZZeUeAbCIF3P8ZCyL33xpw","json_body":"%7B%22image1%22:%22%22,%22last_review%22:0,%22comp
+    leted%22:0,%22creation_date%22:%222013-07-10T17:35:19Z%22,%22location_name%22:%22Location%20002%22,%22importance%22:1,%22sys_mo
+    dified%22:0,%22image3%22:%22%22,%22problem_area%22:%22Electrical%20Equip%20Room%22,%22identifier%22:null,%22image2%22:%22%22,%22user_name%22:null,%22current_sta
+    tus%22:%22Queued%22,%22sys_new%22:1,%22desc%22:%22Asd%22%7D","image1":"#<File:0x36075a8>"}'
+    response:
+        success: {"id"=>6}
+        error: {"errors"=>{"pictures"=>["must be at least one picture."]}, "success"=>false, "status"=>402}
+====get requests(method POST)
+    url: http://localhost:3000/api/get_requests_list.json
+    data: {"auth_token":"mGQ0Y1BNVxY3JVNtR2h7JuZEhjYK3O"}
+    response:
+        {"id"=>6, "creation_date"=>"2013-07-10T17:35:19Z", "completed"=>0, "last_reviewed"=>nil, "desc"=>"Asd", "user"=>"admin admin", "status"=>"Queued", "importance"=
+        >nil, "problem_area"=>"Electrical Equip Room", "location"=>"Location 002", "picture1"=>"/pictures/1/requests/6/original/picture1.jpg?1374150789", "picture2"=>ni
+        l, "picture3"=>nil}
+        {"id"=>7, "creation_date"=>"2013-07-10T17:35:19Z", "completed"=>0, "last_reviewed"=>nil, "desc"=>"Asd", "user"=>"admin admin", "status"=>"Queued", "importance"=
+        >nil, "problem_area"=>"Electrical Equip Room", "location"=>"Location 002", "picture1"=>"/pictures/1/requests/7/original/picture1.jpg?1374151223", "picture2"=>ni
+        l, "picture3"=>nil}
+====update request:(method POST)
+    url: http://localhost:3000/api/update_request
+    data: {"auth_token":"p8jUHjxKRUGYauSXdxFFTKzx4c5e7t","request_id":"6000","location":"Location 001","creation_date":"2004-03-07T13:17:10Z","description":"Con(changed)
+          ","importance":"Low","last_reviewed":"","problem_area":"dfdf","curent_status":"dgfgsd"}
+    response:
+        success: {"request"=>{"id"=>6, "completed"=>0, "desc"=>"Asd", "creation_date"=>"1078665430", "problem_area"=>"Electrical Equip Room", "status"=>"Queued", "importance"=>"Low", "last_review"=>"", "location"=>"Location 002"}}
+        error: {"errors"=>["can't find request by id"], "success"=>false, "status"=>402}
+====remove request:(method DELETE)
+    url: http://localhost:3000/api/remove_request.json
+    data: {"auth_token":"QNRsh33tfLcgyHkkzj3aMxsVtqEkGz","request_id":"6"}
+    response:
+        success: {"success":true,"message":"successfully deleted request"}
+        error: {"errors"=>["can't find request by id"], "success"=>false, "status"=>402}
+=== Lists
+==== get lists:(method GET)
+    url: http://localhost:3000/api/get_lists?auth_token=jAdC38p3qhWDDn7eC6FP
+    response:
+    {"locations"=>["Location 001", "Location 002", "Location 003", "Location 004"], "problem_areas"=>["Conveyor Chain", "Electrical Equip Room", "Mitter Curtain", "
+    Wheel Blasters", "Plumbing Water", "POS System"], "statuses"=>["Queued", "Parts Ordered", "Scheduled", "Under Review"], "importances"=>["Low", "Urgent", "Normal
+    "]}
 
 

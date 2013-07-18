@@ -1,55 +1,51 @@
 
 class Api::SessionsController < Devise::SessionsController
 
-  before_filter :require_no_authentication, :only => [:create]
-  skip_before_filter :verify_authenticity_token,
-                       :if => Proc.new { |c| c.request.format == 'application/json' } , :except => [:destroy]
+   skip_before_filter :authenticate_user!
+   before_filter :api_authentikate_user, only: :destroy
+   before_filter :ensure_params_exist, :only => [:create]
 
-   before_filter :ensure_params_exist, :only => [:create] 
-   
    respond_to :json
 
    def create
-    build_resource
-    resource = User.find_for_database_authentication(:email=>params[:user][:email])
-    return invalid_login_attempt unless resource
-     
-    if resource.valid_password?(params[:user][:password])
-      sign_in("user", resource)
-      render :json => {:success=>true, 
-                      :info => "Logged in", 
-                      :data => {
-                                :auth_token=>resource.authentication_token,  
-                                :email => resource.email, 
-                                :user_type => resource.user_type.to_s 
-                              }
+    @user = User.find_for_database_authentication(:email=>params[:user][:email])
+
+    if @user && @user.valid_password?(params[:user][:password])
+      range = [*'0'..'9', *'a'..'z', *'A'..'Z']
+      session = Session.create(user_id: @user.id, auth_token: Array.new(30){range.sample}.join)
+      render :json => {:success=>true,
+                      :info => "Logged in",
+                      :data => {auth_token: session.auth_token, email: resource.email, user_type: resource.user_type.to_s},
+                      :status => 200
                     }
-      return
+    else
+      invalid_login_attempt 'invalid login or password', 401
     end
-    invalid_login_attempt
   end
 
   def destroy
-    #warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#invalid_login_attempt")
-    @user = User.where(:authentication_token => params[:auth_token]).first
-    if @user
-      @user.update_column(:authentication_token, nil)
-      render :status => 200, :json => { :success => true,
-                             :info => "Logged out",
-                             :data => {} }
+    remove_expired_sessions   #sorry
+    session = Session.where(:auth_token => params[:auth_token]).first
+    if session
+      session.destroy
+      render :json => { :success => true,  :info => "Logged out", :status => 200 }
     else
-      invalid_login_attempt
+      invalid_login_attempt 'invalid login or password', 401
     end
   end
 
   protected
   
   def ensure_params_exist
-    return unless params[:user].blank? || params[:user][:email].blank? || params[:user][:password].blank?
-    invalid_login_attempt
+    if params[:user].blank? || params[:user][:email].blank? || params[:user][:password].blank?
+      invalid_login_attempt 'invalid login or password', 401
+    end
   end
 
-  def invalid_login_attempt
-    render 'api/errors/require_auth', :status => 401
+  def remove_expired_sessions
+    Session.where("updated_at < ?", Time.now - 1.week).each do |session|
+      session.destroy
+    end
   end
+
 end

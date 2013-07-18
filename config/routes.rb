@@ -12,7 +12,6 @@ WashDepot::Application.routes.draw do
 
     post 'get_requests_list', to: 'requests#index'
     post 'create_request', to: 'requests#create'
-    post 'get_request', to: 'requests#show'
     post 'update_request', to: 'requests#update'
     delete 'remove_request', to: 'requests#destroy'
 

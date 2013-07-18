@@ -1,5 +1,9 @@
 class Api::RequestsController < ApplicationController
-	respond_to :json
+
+  skip_before_filter :authenticate_user!
+  before_filter :api_authentikate_user
+
+  respond_to :json
 
 	before_filter :only_admin_manager, :only => :index
 	before_filter :only_admin, :only => [:update]
@@ -10,21 +14,7 @@ class Api::RequestsController < ApplicationController
       @requests = Request.all
       format.json{}
     end
-	end
-
-	def show
-    respond_to do |format|
-      if params[:request_id]
-        @request = Request.find params[:request_id]
-        @request.class_eval do
-          attr_accessor :body, :original_filename
-        end
-        format.json{}
-      else
-        format.json {render :json => 'request id needed'}
-      end
-    end
-	end
+  end
 
 	def create
     @params = params
@@ -41,51 +31,50 @@ class Api::RequestsController < ApplicationController
     @params_options[:picture2] = image2
     @params_options[:picture3] = image3
 
-    user = User.where(:authentication_token => auth_token).first
-    @request = user.requests.build @params_options
-    respond_to do |format|
+    @request = @current_user.requests.build @params_options
       if @request.save
-        format.json {}
+        respond_to do |format|
+          format.json {}
+        end
       else
-        format.json {render :json => @request.errors.to_json }
+        invalid_login_attempt @request.errors, 402
       end
-    end
 	end
 
 	def update
     @params = params
     retrieve_params
-    respond_to do |format|
-      if @request
-        if @request.update_attributes(@params_options)
+    if @request
+      if @request.update_attributes(@params_options)
+        respond_to do |format|
           format.json {}
-        else
-          format.json {render :json => @request.errors.to_json }
         end
       else
-        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
+        invalid_login_attempt @request.errors, 402
       end
+    else
+      invalid_login_attempt ['can\'t find request by id'], 402
     end
   end
 
 	def destroy
-		respond_to do |format|
-      if @request && @request.destroy
+    if @request && @request.destroy
+      respond_to do |format|
         format.json { render :json => {success: true, message: 'successfully deleted request'} }
-      else
-        format.json { render :json => {success: false, message: 'can\'t find request by id'} }
       end
-		end
+    else
+      invalid_login_attempt ['can\'t find request by id'], 402
+    end
   end
 
 	private
 
 	def only_admin_manager
-		render "api/errors/permission_denied" unless (current_user && (current_user.role?(:admin) || current_user.role?(:manager)))
+    invalid_login_attempt(['permission denied'], 402) unless (current_user && (current_user.role?(:admin) || current_user.role?(:manager)))
 	end
 
 	def only_admin
-		render "api/errors/permission_denied" unless (current_user && current_user.role?(:admin))
+    invalid_login_attempt(['permission denied'], 402) unless (current_user && current_user.role?(:admin))
 	end
 
 	def retrieve_params

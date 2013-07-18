@@ -2,6 +2,9 @@ class Api::ListsController < ApplicationController
 
   respond_to :json
 
+  skip_before_filter :authenticate_user!
+  before_filter :api_authentikate_user
+
   def get_lists
     respond_to do |format|
       @locations = Location.all

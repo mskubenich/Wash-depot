@@ -1,4 +1,3 @@
-
 class Api::UsersController < ApplicationController
 
 	respond_to :json
