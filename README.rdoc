@@ -18,25 +18,25 @@ Completed:
 
 == Request & Responses ==
 
-User sign in:
- Type: POST
+User sign in:(method POST request JSON)
 
-    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{\"user\":{\"email\":\"admin@g.com\",\"password\":\"123456\"}}"
-    http://localhost:3000/api/sessions
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST
+    -d "{\"user\":{\"email\":\"admin@g.com\",\"password\":\"123456\"}}" http://localhost:3000/api/sessions
 
 response:
 
     success: {"success":true,"info":"Logged in","data":{"auth_token":"MhNypzbto5xsiqBYV1v2","email":"suser@washdepot.com"}}
     error: {"success":false,"info":"Login Failed","data":{}}
 
+User sign out:(method DELETE request JSON)
 
-User sign out:
-  Type: DELETE 
-  http://wash-depot.herokuapp.com/api/sessions/\?auth_token\=MhNypzbto5xsiqBYV1v2
+    curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d "{\"auth_token\":\"WS7Cyejzruqfz6pQDw2i\"}"
+    http://localhost:3000/api/sessions
 
-  {"success":true,"info":"Logged out","data":{}}
-  {"success":false,"info":"Login Failed","data":{}}
+response
 
+    success:{"success":true,"info":"Logged out","data":{}}
+    error:{"success":false,"info":"Login Failed","data":{}}
 
 = Requests API
 upload request:(method POST request JSON)

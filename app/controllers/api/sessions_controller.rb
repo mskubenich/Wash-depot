@@ -31,11 +31,15 @@ class Api::SessionsController < Devise::SessionsController
 
   def destroy
     #warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#invalid_login_attempt")
-    User.where(:authentication_token => params[:auth_token]).first.update_column(:authentication_token, nil)
-    render :status => 200,
-           :json => { :success => true,
-                      :info => "Logged out",
-                      :data => {} }
+    @user = User.where(:authentication_token => params[:auth_token]).first
+    if @user
+      @user.update_column(:authentication_token, nil)
+      render :status => 200, :json => { :success => true,
+                             :info => "Logged out",
+                             :data => {} }
+    else
+      invalid_login_attempt
+    end
   end
 
   protected
