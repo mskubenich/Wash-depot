@@ -9,42 +9,56 @@
       = link_to 'Back', requests_path, class: 'btn btn-info'
       = link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if can? :destroy, Request
 .row-fluid
-  .span2.text-right
-    %b Completed:
-    %br
-    %b Creation Date:
-    %br
-    %b Description:
-    %br
-    %b Last reviewed:
-    %br
-    %b Importance:
-    %br
-    %b User:
-    %br
-    %b Status:
-    %br
-    %b Location:
-    %br
-    %b Problem Area:
-  .span10
-    = (@request.completed == 1) ? 'Yes' : 'No'
-    %br
-    = @request.creation_date.strftime("%m-%d-%Y EST" ) if @request.creation_date
-    %br
-    = @request.description
-    %br
-    = @request.last_reviewed.strftime("%m-%d-%Y EST" ) if @request.last_reviewed
-    %br
-    = @request.importance.name if @request.importance
-    %br
-    = (@request.user.firstname + ' ' + @request.user.lastname)  if @request.user
-    %br
-    = @request.status.name if @request.status
-    %br
-    = @request.location.name if @request.location
-    %br
-    = @request.problem_area.name if @request.problem_area
+  .span2.table.text-right
+    %table
+      %tr
+        %td
+          %b Completed:
+        %td
+          = @request.completed ? 'Completed':'Uncompleted'
+      %tr
+        %td
+          %b Creation date:
+        %td
+          = @request.creation_date.strftime("%m-%d-%Y EST" ) if @request.creation_date
+      %tr
+        %td
+          %b Description:
+        %td
+          = @request.description
+      %tr
+        %td
+          %b Last reviewed:
+        %td
+          = @request.last_reviewed.strftime("%m-%d-%Y EST" ) if @request.last_reviewed
+      %tr
+        %td
+          %b Importance:
+        %td
+          = @request.importance.name if @request.importance
+      %tr
+        %td
+          %b Firstname:
+        %td
+          = (@request.user.firstname + ' ' + @request.user.lastname)  if @request.user
+      %tr
+        %td
+          %b Status:
+        %td
+          = @request.status.name if @request.status
+      %tr
+        %td
+          %b Location:
+        %td
+          = @request.location.name if @request.location
+      %tr
+        %td
+          %b Problem area:
+        %td
+          = @request.problem_area.name if @request.problem_area
+
+
+
 %div
   = link_to(image_tag(@request.picture1.url, style: 'height: 200px', class: 'img-polaroid'),  @request.picture1.url, 'data-lightbox' => "roadtrip") if @request.picture1.exists?
   = link_to(image_tag(@request.picture2.url, style: 'height: 200px', class: 'img-polaroid'),  @request.picture2.url, 'data-lightbox' => "roadtrip") if @request.picture2.exists?
