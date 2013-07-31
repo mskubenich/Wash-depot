@@ -32,21 +32,6 @@ admin = User.create(:firstname => "admin", :lastname => "admin", :email => "admi
 			:password => "123456", :password_confirmation => "123456")
 admin.roles = [Role.find_by_name(:admin)]
 
-3.times do |t|
-  regular_t = User.create(:firstname => "John", :lastname => "Carney", :email => "regular_#{t}@g.com", :password => "123456",
-                        :password_confirmation => "123456")
-  regular_t.roles = [Role.find_by_name(:regular)]
-
-  manager_t = User.create(:firstname => "manager", :lastname => "manager", :email => "manager_#{t}@g.com",
-                        :password => "123456", :password_confirmation => "123456")
-  manager_t.roles = [Role.find_by_name(:manager)]
-
-  admin_t = User.create(:firstname => "admin", :lastname => "admin", :email => "admin_#{t}@g.com",
-                      :password => "123456", :password_confirmation => "123456")
-  admin_t.roles = [Role.find_by_name(:admin)]
-end
-
-
 puts "Statuses creation"
 
 Status.delete_all

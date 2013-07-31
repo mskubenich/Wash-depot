@@ -15,7 +15,7 @@ class Api::SessionsController < Devise::SessionsController
       session = Session.create(user_id: @user.id, auth_token: Array.new(30){range.sample}.join)
       render :json => {:success=>true,
                       :info => "Logged in",
-                      :data => {auth_token: session.auth_token, email: resource.email, user_type: resource.user_type.to_s},
+                      :data => {auth_token: session.auth_token, email: @user.email, user_type: @user.user_type.to_s},
                       :status => 200
                     }
     else
