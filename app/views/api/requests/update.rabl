@@ -7,7 +7,7 @@ node :desc do |request|
 end
 
 node :creation_date do |request|
-	request.creation_date.to_time.to_i.to_s
+	request.creation_date.to_time.to_i.to_s if request.creation_date
 end
 
 node :problem_area do |request|
