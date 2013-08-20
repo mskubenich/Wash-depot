@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def invalid_login_attempt(errors, status = 200)
     warden.custom_failure!
-    render :json => {:errors => errors,  :success => false, :status => status} and return
+    render :json => {:errors => errors,  :success => false}, :status => status and return
   end
 
   def api_authentikate_user
